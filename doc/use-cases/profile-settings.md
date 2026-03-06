@@ -6,6 +6,31 @@
 **Preconditions**: Provider is logged in  
 **Page**: `/provider/profile`
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant Analytics
+    
+    Provider->>System: Navigate to profile page
+    System->>DB: Retrieve profile information
+    System->>DB: Retrieve statistics
+    System->>Analytics: Get performance metrics
+    DB-->>System: Return all profile data
+    System->>Provider: Display profile sections
+    opt View Public Profile
+        Provider->>System: Click "View as Customer"
+        System->>Provider: Display public-facing profile
+    end
+    opt View Analytics
+        Provider->>System: Click "Profile Analytics"
+        System->>Analytics: Retrieve metrics
+        System->>Provider: Display analytics
+    end
+```
+
 ### Main Flow
 1. Provider navigates to profile page
 2. System retrieves provider's profile information
@@ -76,6 +101,40 @@
 **Actor**: Provider  
 **Preconditions**: Provider is logged in  
 **Page**: `/provider/profile` (edit mode)
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant Storage
+    participant DB as Database
+    participant Verification
+    
+    Provider->>System: Click "Edit Profile"
+    System->>DB: Retrieve current profile
+    DB-->>System: Return profile data
+    System->>Provider: Display editable form
+    Provider->>System: Update information
+    opt Upload Photo
+        Provider->>System: Upload new photo
+        System->>Storage: Store image
+        Storage-->>System: Return image URL
+    end
+    opt Upload Documents
+        Provider->>System: Upload certifications
+        System->>Verification: Submit for verification
+    end
+    Provider->>System: Submit changes
+    System->>System: Validate fields
+    alt Valid data
+        System->>DB: Update profile
+        System->>Provider: Display success
+        System->>Provider: Show updated profile
+    else Invalid data
+        System->>Provider: Display errors
+    end
+```
 
 ### Main Flow
 1. Provider clicks "Edit Profile" button
@@ -173,6 +232,41 @@
 **Actor**: Provider  
 **Preconditions**: Provider is logged in  
 **Page**: `/provider/settings`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant External as External Services
+    participant Auth as Authentication
+    
+    Provider->>System: Navigate to settings
+    System->>DB: Retrieve current settings
+    DB-->>System: Return settings data
+    System->>Provider: Display settings categories
+    Provider->>System: Modify settings
+    alt Change Password
+        Provider->>System: Request password change
+        System->>Auth: Verify current password
+        Auth-->>System: Verification result
+        System->>Auth: Update password
+    else Enable 2FA
+        Provider->>System: Enable 2FA
+        System->>Auth: Generate setup code
+        System->>Provider: Display QR code
+        Provider->>System: Verify setup
+    else Link Calendar
+        Provider->>System: Link external calendar
+        System->>External: Authorize connection
+        External-->>System: Authorization granted
+        System->>DB: Save integration
+    end
+    Provider->>System: Save changes
+    System->>DB: Update settings
+    System->>Provider: Display confirmation
+```
 
 ### Main Flow
 1. Provider navigates to settings page

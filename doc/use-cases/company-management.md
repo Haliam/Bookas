@@ -6,6 +6,24 @@
 **Preconditions**: Provider is logged in and has completed onboarding  
 **Page**: `/provider/companies`
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    
+    Provider->>System: Navigate to companies page
+    System->>DB: Retrieve provider's companies
+    DB-->>System: Return companies list
+    System->>System: Format display data
+    System->>Provider: Display companies
+    opt Filter/Search
+        Provider->>System: Apply filters
+        System->>Provider: Display filtered results
+    end
+```
+
 ### Main Flow
 1. Provider navigates to Companies page
 2. System retrieves all companies belonging to the provider
@@ -48,6 +66,34 @@
 **Actor**: Provider  
 **Preconditions**: Provider is logged in  
 **Page**: `/provider/companies/create`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant Storage
+    participant DB as Database
+    
+    Provider->>System: Click "Create Company"
+    System->>Provider: Display creation form
+    Provider->>System: Enter company information
+    opt Upload Logo
+        Provider->>System: Upload logo file
+        System->>Storage: Store logo image
+        Storage-->>System: Return image URL
+    end
+    Provider->>System: Submit form
+    System->>System: Validate required fields
+    alt Valid data
+        System->>DB: Create company record
+        DB-->>System: Company created
+        System->>Provider: Display success message
+        System->>Provider: Redirect to services page
+    else Invalid data
+        System->>Provider: Display validation errors
+    end
+```
 
 ### Main Flow
 1. Provider clicks "Create Company" button
@@ -123,6 +169,30 @@
 **Preconditions**: Provider owns the company  
 **Page**: `/provider/companies/:id/edit`
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    
+    Provider->>System: Navigate to edit page
+    System->>DB: Retrieve company data
+    DB-->>System: Return company info
+    System->>Provider: Display populated form
+    Provider->>System: Modify information
+    Provider->>System: Submit changes
+    System->>System: Validate changes
+    alt Valid changes
+        System->>DB: Update company record
+        DB-->>System: Update confirmed
+        System->>Provider: Display success message
+        System->>Provider: Redirect to companies list
+    else Validation errors
+        System->>Provider: Display errors
+    end
+```
+
 ### Main Flow
 1. Provider navigates to company edit page
 2. System retrieves existing company data
@@ -174,6 +244,34 @@
 **Actor**: Provider  
 **Preconditions**: Provider owns the company  
 **Page**: `/provider/companies`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant Notify as Notification Service
+    
+    Provider->>System: Click delete button
+    System->>DB: Check dependencies
+    DB-->>System: Return services & appointments
+    System->>Provider: Display confirmation with impact
+    alt Confirm deletion
+        Provider->>System: Confirm
+        alt Has active appointments
+            System->>Provider: Display warning - cannot delete
+        else No active appointments
+            System->>DB: Soft delete company
+            System->>DB: Cascade to services
+            System->>Notify: Send notifications to customers
+            System->>Provider: Display success
+        end
+    else Cancel
+        Provider->>System: Cancel
+        System->>Provider: Return to list
+    end
+```
 
 ### Main Flow
 1. Provider clicks delete button on company

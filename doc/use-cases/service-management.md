@@ -6,6 +6,23 @@
 **Preconditions**: Provider is logged in and has at least one company  
 **Page**: `/provider/companies/:id/services`
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    
+    Provider->>System: Navigate to services page
+    System->>DB: Retrieve services for company
+    DB-->>System: Return services list
+    System->>Provider: Display services
+    opt Filter/Search/Sort
+        Provider->>System: Apply filters
+        System->>Provider: Display filtered results
+    end
+```
+
 ### Main Flow
 1. Provider navigates to services page for a specific company
 2. System retrieves all services for the selected company
@@ -55,6 +72,35 @@
 **Actor**: Provider  
 **Preconditions**: Provider has at least one company  
 **Page**: `/provider/companies/:id/services/create`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant Storage
+    participant DB as Database
+    
+    Provider->>System: Click "Create Service"
+    System->>Provider: Display service form
+    Provider->>System: Enter service details
+    opt Upload Images
+        Provider->>System: Upload service images
+        System->>Storage: Store images
+        Storage-->>System: Return image URLs
+    end
+    Provider->>System: Submit form
+    System->>System: Validate fields
+    alt Valid data
+        System->>DB: Create service record
+        System->>DB: Link to company
+        DB-->>System: Service created
+        System->>Provider: Display success
+        System->>Provider: Redirect to services list
+    else Invalid data
+        System->>Provider: Display validation errors
+    end
+```
 
 ### Main Flow
 1. Provider clicks "Create Service" button
@@ -142,6 +188,31 @@
 **Preconditions**: Provider owns the company and service  
 **Page**: `/provider/companies/:id/services/edit` or inline edit
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant Notify as Notification Service
+    
+    Provider->>System: Navigate to edit page
+    System->>DB: Retrieve service data
+    DB-->>System: Return service info
+    System->>Provider: Display populated form
+    Provider->>System: Modify information
+    Provider->>System: Submit changes
+    System->>DB: Check impact on bookings
+    DB-->>System: Return affected bookings
+    alt Price/Duration changed
+        System->>Provider: Show impact warning
+        Provider->>System: Confirm changes
+    end
+    System->>DB: Update service record
+    System->>Notify: Notify affected customers (if needed)
+    System->>Provider: Display success
+```
+
 ### Main Flow
 1. Provider navigates to service edit page or clicks edit button
 2. System retrieves existing service data
@@ -205,6 +276,32 @@
 **Actor**: Provider  
 **Preconditions**: Provider owns the company and service  
 **Page**: `/provider/companies/:id/services`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant Payment
+    participant Notify as Notification Service
+    
+    Provider->>System: Click delete button
+    System->>DB: Check for bookings
+    DB-->>System: Return booking status
+    System->>Provider: Display confirmation with impact
+    alt Has active bookings
+        System->>Provider: Display warning - cannot delete
+        Provider->>System: Choose deactivate instead
+        System->>DB: Mark service inactive
+    else No active bookings
+        Provider->>System: Confirm deletion
+        System->>DB: Soft delete service
+        System->>Payment: Process refunds (if needed)
+        System->>Notify: Notify affected customers
+        System->>Provider: Display success
+    end
+```
 
 ### Main Flow
 1. Provider clicks delete button on service

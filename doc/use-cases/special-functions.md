@@ -6,6 +6,54 @@
 **Preconditions**: Network connection is lost or unavailable  
 **Page**: `/offline`
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor User
+    participant System
+    participant Cache as Local Cache
+    participant Network
+    participant SyncQueue
+    participant DB as Database
+    
+    User->>System: Use application
+    System->>Network: Detect connection loss
+    Network-->>System: Connection unavailable
+    System->>User: Display offline indicator
+    System->>User: Redirect to offline page
+    System->>Cache: Retrieve cached data
+    Cache-->>System: Return cached appointments
+    System->>User: Display available offline features
+    
+    alt User Performs Action
+        User->>System: Create/Edit data
+        System->>Cache: Save locally
+        System->>SyncQueue: Queue action
+        System->>User: Display "Will sync when online"
+    end
+    
+    loop Check Connectivity
+        System->>Network: Check connection
+    end
+    
+    Network-->>System: Connection restored
+    System->>User: Display "Back Online"
+    System->>SyncQueue: Get pending actions
+    SyncQueue-->>System: Return queued actions
+    
+    loop Sync Actions
+        System->>DB: Sync queued action
+        alt Conflict Detected
+            DB-->>System: Return conflict
+            System->>User: Request conflict resolution
+            User->>System: Choose resolution
+        end
+    end
+    
+    System->>DB: Refresh data
+    System->>User: Redirect to last active page
+```
+
 ### Main Flow
 1. User is using the application
 2. System detects network connection loss

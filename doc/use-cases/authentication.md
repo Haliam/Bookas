@@ -6,6 +6,28 @@
 **Preconditions**: User is not registered in the system  
 **Page**: `/register`
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor User as New User
+    participant System
+    participant DB as Database
+    participant Email as Email Service
+    
+    User->>System: Navigate to registration page
+    System->>User: Display registration form
+    User->>System: Submit registration data
+    System->>System: Validate input
+    alt Valid data
+        System->>DB: Create user account
+        DB-->>System: Account created
+        System->>Email: Send verification email
+        System->>User: Redirect to onboarding
+    else Invalid data
+        System->>User: Display validation errors
+    end
+```
+
 ### Main Flow
 1. User navigates to the registration page
 2. System displays registration form
@@ -55,6 +77,28 @@
 **Preconditions**: User has a valid account  
 **Page**: `/login`
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor User as Registered User
+    participant System
+    participant Auth as Authentication Service
+    participant Session
+    
+    User->>System: Navigate to login page
+    System->>User: Display login form
+    User->>System: Enter credentials
+    System->>Auth: Validate credentials
+    alt Valid credentials
+        Auth-->>System: Authentication success
+        System->>Session: Create user session
+        System->>User: Redirect to dashboard
+    else Invalid credentials
+        Auth-->>System: Authentication failed
+        System->>User: Display error message
+    end
+```
+
 ### Main Flow
 1. User navigates to login page
 2. System displays login form
@@ -100,6 +144,30 @@
 **Actor**: Registered User  
 **Preconditions**: User has forgotten their password  
 **Page**: `/forgot-password`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor User as Registered User
+    participant System
+    participant DB as Database
+    participant Email as Email Service
+    
+    User->>System: Navigate to forgot password
+    System->>User: Display email input form
+    User->>System: Enter email address
+    System->>DB: Check email exists
+    DB-->>System: Email validation result
+    System->>System: Generate reset token
+    System->>Email: Send reset link
+    System->>User: Display confirmation
+    User->>System: Click reset link in email
+    System->>System: Validate token
+    System->>User: Display new password form
+    User->>System: Submit new password
+    System->>DB: Update password
+    System->>User: Redirect to login
+```
 
 ### Main Flow
 1. User navigates to "Forgot Password" page
@@ -150,6 +218,24 @@
 **Actor**: Authenticated User with multiple roles  
 **Preconditions**: User is logged in and has access to multiple roles (e.g., Customer and Provider)  
 **Page**: `/role-switch`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor User as Multi-role User
+    participant System
+    participant Session
+    participant Auth as Authorization Service
+    
+    User->>System: Navigate to role switch
+    System->>Auth: Get available roles
+    Auth-->>System: Return user roles
+    System->>User: Display role options
+    User->>System: Select desired role
+    System->>Session: Update session with new role
+    System->>Auth: Apply role permissions
+    System->>User: Redirect to role dashboard
+```
 
 ### Main Flow
 1. User navigates to role switch page

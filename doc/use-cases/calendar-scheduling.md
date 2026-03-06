@@ -6,6 +6,31 @@
 **Preconditions**: Provider is logged in  
 **Page**: `/provider/calendar`
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant Calendar
+    
+    Provider->>System: Navigate to calendar page
+    System->>DB: Retrieve appointments
+    System->>DB: Retrieve blocked time slots
+    System->>Calendar: Retrieve availability
+    DB-->>System: Return all calendar data
+    System->>Provider: Display calendar view
+    opt Switch View
+        Provider->>System: Change view (Month/Week/Day)
+        System->>Provider: Update calendar display
+    end
+    opt Navigate Date
+        Provider->>System: Select different date
+        System->>DB: Retrieve data for date
+        System->>Provider: Display updated calendar
+    end
+```
+
 ### Main Flow
 1. Provider navigates to calendar page
 2. System retrieves provider's appointments and availability
@@ -71,6 +96,36 @@
 **Actor**: Provider  
 **Preconditions**: Provider is logged in  
 **Page**: `/provider/hours`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant Calendar
+    
+    Provider->>System: Navigate to working hours
+    System->>DB: Retrieve current hours configuration
+    DB-->>System: Return working hours
+    System->>Provider: Display weekly schedule grid
+    Provider->>System: Configure hours for each day
+    opt Add Breaks
+        Provider->>System: Add break times
+    end
+    opt Split Shifts
+        Provider->>System: Configure split shifts
+    end
+    Provider->>System: Save configuration
+    System->>System: Validate hours (no overlaps)
+    alt Valid configuration
+        System->>DB: Update working hours
+        System->>Calendar: Update availability
+        System->>Provider: Display confirmation
+    else Invalid configuration
+        System->>Provider: Display validation errors
+    end
+```
 
 ### Main Flow
 1. Provider navigates to working hours configuration
@@ -156,6 +211,36 @@
 **Preconditions**: Provider is logged in  
 **Page**: `/provider/block-time` or `/provider/calendar`
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant Calendar
+    participant Notify as Notification Service
+    
+    Provider->>System: Navigate to block time or click slot
+    System->>Provider: Display blocking interface
+    Provider->>System: Specify time range & reason
+    opt Recurrence
+        Provider->>System: Set recurrence pattern
+    end
+    Provider->>System: Submit block request
+    System->>DB: Check for existing appointments
+    DB-->>System: Return conflicts (if any)
+    alt Conflicts exist
+        System->>Provider: Display conflicts
+        Provider->>System: Choose action (cancel/reschedule/adjust)
+        opt Cancel appointments
+            System->>Notify: Send cancellation notices
+        end
+    end
+    System->>DB: Create time block
+    System->>Calendar: Update availability
+    System->>Provider: Display confirmation
+```
+
 ### Main Flow
 1. Provider navigates to block time page or clicks time slot on calendar
 2. System displays blocking interface
@@ -240,6 +325,33 @@
 **Actor**: Provider  
 **Preconditions**: Provider has blocked time slots  
 **Page**: `/provider/block-time` or `/provider/calendar`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant Calendar
+    participant Notify as Notification Service
+    
+    Provider->>System: Navigate to blocked times
+    System->>DB: Retrieve active blocks
+    DB-->>System: Return blocked slots
+    System->>Provider: Display blocked time slots
+    Provider->>System: Select block to remove
+    Provider->>System: Click "Unblock"
+    System->>DB: Check for pending requests
+    DB-->>System: Return pending requests (if any)
+    System->>Provider: Display confirmation dialog
+    Provider->>System: Confirm unblock
+    System->>DB: Remove time block
+    System->>Calendar: Restore availability
+    opt Has pending requests
+        System->>Notify: Notify pending requesters
+    end
+    System->>Provider: Display confirmation
+```
 
 ### Main Flow
 1. Provider navigates to blocked times list or calendar

@@ -6,6 +6,29 @@
 **Preconditions**: Provider is logged in  
 **Page**: `/provider/notifications`
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    
+    Provider->>System: Navigate to notifications or click bell
+    System->>DB: Retrieve notifications
+    DB-->>System: Return notifications list
+    System->>System: Sort by chronological order
+    System->>Provider: Display notifications
+    System->>DB: Mark as read (when viewed)
+    opt Filter
+        Provider->>System: Apply filter by type
+        System->>Provider: Display filtered notifications
+    end
+    opt Quick Action
+        Provider->>System: Click action button
+        System->>Provider: Navigate to relevant page
+    end
+```
+
 ### Main Flow
 1. Provider navigates to notifications page or clicks notification bell
 2. System retrieves all notifications for the provider
@@ -92,6 +115,30 @@
 **Actor**: Provider  
 **Preconditions**: Provider is logged in  
 **Page**: `/provider/settings` (Notifications section)
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    
+    Provider->>System: Navigate to notification preferences
+    System->>DB: Retrieve current preferences
+    DB-->>System: Return preferences
+    System->>Provider: Display settings (channels & types)
+    Provider->>System: Customize preferences
+    opt Set Quiet Hours
+        Provider->>System: Enable & configure quiet hours
+    end
+    opt Pause Notifications
+        Provider->>System: Pause for duration
+    end
+    Provider->>System: Save preferences
+    System->>System: Validate settings
+    System->>DB: Update preferences
+    System->>Provider: Display confirmation
+```
 
 ### Main Flow
 1. Provider navigates to notification preferences
@@ -183,6 +230,36 @@
 **Actor**: Provider  
 **Preconditions**: Provider is logged in and has booking history  
 **Page**: `/provider/reports`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant Analytics
+    participant Export
+    
+    Provider->>System: Navigate to reports page
+    System->>Provider: Display report options
+    Provider->>System: Select report type & parameters
+    Provider->>System: Click "Generate Report"
+    System->>DB: Query data for date range
+    System->>Analytics: Process data & calculate metrics
+    Analytics-->>System: Return processed data
+    System->>System: Generate visualizations
+    System->>Provider: Display report with charts
+    opt Export
+        Provider->>System: Click "Export"
+        System->>Export: Generate file (PDF/Excel/CSV)
+        Export-->>System: Return file
+        System->>Provider: Download file
+    end
+    opt Schedule
+        Provider->>System: Schedule recurring report
+        System->>DB: Save schedule
+    end
+```
 
 ### Main Flow
 1. Provider navigates to reports page
@@ -299,6 +376,41 @@
 **Actor**: Provider  
 **Preconditions**: Provider is logged in  
 **Page**: `/provider` (Dashboard)
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant Analytics
+    participant Cache
+    
+    Provider->>System: Login or navigate to dashboard
+    System->>Cache: Check for cached metrics
+    alt Cache Hit
+        Cache-->>System: Return cached data
+    else Cache Miss
+        System->>DB: Retrieve appointments & revenue
+        System->>Analytics: Calculate key metrics
+        Analytics-->>System: Return processed metrics
+        System->>Cache: Store in cache
+    end
+    System->>Provider: Display dashboard with widgets
+    opt Customize
+        Provider->>System: Customize dashboard layout
+        System->>DB: Save layout preferences
+    end
+    opt Drill Down
+        Provider->>System: Click on metric
+        System->>Provider: Navigate to detailed report
+    end
+    opt Set Goals
+        Provider->>System: Set performance goals
+        System->>DB: Save goals
+        System->>Provider: Display progress indicators
+    end
+```
 
 ### Main Flow
 1. Provider logs in or navigates to dashboard

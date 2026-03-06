@@ -63,10 +63,21 @@ Each use case follows this structure:
 **Name**: Short descriptive name  
 **Actor**: Who performs the action  
 **Preconditions**: What must be true before the use case  
+**Diagram**: Visual Mermaid sequence diagram showing actor-system interaction  
 **Main Flow**: Step-by-step normal flow  
 **Alternative Flows**: Variations or error cases  
 **Postconditions**: State after successful completion  
-**Business Rules**: Constraints and validations  
+**Business Rules**: Constraints and validations
+
+### Diagram Notation
+
+All use cases include **Mermaid sequence diagrams** that visualize:
+- Actor-system interactions
+- Data flow between components
+- Decision points and alternative paths
+- Integration with external services
+
+These diagrams render automatically in GitHub, VS Code, and other Markdown viewers that support Mermaid.  
 
 ---
 

@@ -6,6 +6,25 @@
 **Preconditions**: Provider is logged in  
 **Page**: `/provider/appointments`
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    
+    Provider->>System: Navigate to appointments page
+    System->>DB: Retrieve provider's appointments
+    DB-->>System: Return appointments list
+    System->>Provider: Display appointments
+    opt Filter/Search
+        Provider->>System: Apply filters (status, date, etc.)
+        System->>DB: Query filtered appointments
+        DB-->>System: Return filtered results
+        System->>Provider: Display filtered appointments
+    end
+```
+
 ### Main Flow
 1. Provider navigates to appointments page
 2. System retrieves all appointments for the provider
@@ -65,6 +84,22 @@
 **Actor**: Provider  
 **Preconditions**: Provider has appointments  
 **Page**: `/provider/appointments/:id`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    
+    Provider->>System: Click on appointment
+    System->>DB: Retrieve appointment details
+    System->>DB: Retrieve customer information
+    System->>DB: Retrieve booking history
+    DB-->>System: Return complete data
+    System->>Provider: Display comprehensive details
+    Provider->>System: Perform action (if needed)
+```
 
 ### Main Flow
 1. Provider clicks on an appointment
@@ -130,6 +165,38 @@
 **Actor**: Provider  
 **Preconditions**: Appointment is in "Pending" status  
 **Page**: `/provider/appointments/:id`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant Calendar
+    participant Notify as Notification Service
+    
+    Provider->>System: View pending appointment
+    alt Accept Flow
+        Provider->>System: Click "Accept"
+        System->>Provider: Show confirmation dialog
+        Provider->>System: Confirm acceptance
+        System->>DB: Update status to "Confirmed"
+        System->>Calendar: Block time slot
+        System->>Notify: Send confirmation to customer
+        System->>Provider: Display success
+    else Reject Flow
+        Provider->>System: Click "Reject"
+        System->>Provider: Show rejection form
+        Provider->>System: Select reason & confirm
+        System->>DB: Update status to "Rejected"
+        System->>Calendar: Release time slot
+        System->>Notify: Send rejection to customer
+        opt Payment Made
+            System->>DB: Process refund
+        end
+        System->>Provider: Display confirmation
+    end
+```
 
 ### Main Flow - Accept
 1. Provider views pending appointment
@@ -206,6 +273,29 @@
 **Preconditions**: Appointment is confirmed or pending  
 **Page**: `/provider/appointments/:id`
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant Payment
+    participant Calendar
+    participant Notify as Notification Service
+    
+    Provider->>System: Open appointment details
+    Provider->>System: Click "Cancel"
+    System->>Provider: Display cancellation form
+    Provider->>System: Select reason & add message
+    Provider->>System: Confirm cancellation
+    System->>DB: Calculate cancellation fee
+    System->>DB: Update status to "Cancelled"
+    System->>Payment: Process refund
+    System->>Calendar: Release time slot
+    System->>Notify: Send cancellation notice to customer
+    System->>Provider: Display confirmation
+```
+
 ### Main Flow
 1. Provider opens appointment details
 2. Provider clicks "Cancel" button
@@ -271,6 +361,38 @@
 **Actor**: Provider  
 **Preconditions**: Appointment exists and is not completed  
 **Page**: `/provider/appointments/:id`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider
+    participant System
+    participant DB as Database
+    participant Calendar
+    participant Notify as Notification Service
+    participant Customer
+    
+    Provider->>System: Open appointment
+    Provider->>System: Click "Reschedule"
+    System->>Calendar: Retrieve availability
+    Calendar-->>System: Return available slots
+    System->>Provider: Display calendar with availability
+    Provider->>System: Select new date/time
+    System->>System: Validate new slot
+    Provider->>System: Submit reschedule request
+    System->>DB: Mark as "Reschedule Pending"
+    System->>Notify: Send request to customer
+    Notify->>Customer: Reschedule request
+    alt Customer Accepts
+        Customer->>System: Accept new time
+        System->>DB: Update appointment
+        System->>Calendar: Update bookings
+        System->>Notify: Notify both parties
+    else Customer Rejects
+        Customer->>System: Reject or propose alternative
+        System->>Notify: Notify provider
+    end
+```
 
 ### Main Flow
 1. Provider opens appointment details

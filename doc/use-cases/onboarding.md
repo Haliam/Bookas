@@ -6,6 +6,25 @@
 **Preconditions**: User has just registered but not completed onboarding  
 **Page**: `/onboarding`
 
+### Diagram
+```mermaid
+sequenceDiagram
+    actor User as New User
+    participant System
+    participant DB as Database
+    
+    System->>User: Redirect to onboarding
+    System->>User: Display welcome screen
+    loop Onboarding Steps
+        System->>User: Display step (1-4)
+        User->>System: Complete step
+        System->>DB: Save progress
+    end
+    User->>System: Complete all steps
+    System->>DB: Mark user as onboarded
+    System->>User: Redirect to dashboard
+```
+
 ### Main Flow
 1. System redirects newly registered user to onboarding page
 2. System displays welcome screen with app introduction
@@ -55,6 +74,37 @@
 **Actor**: New Provider  
 **Preconditions**: User has registered with Provider role  
 **Page**: `/onboarding-provider`
+
+### Diagram
+```mermaid
+sequenceDiagram
+    actor Provider as New Provider
+    participant System
+    participant Verification
+    participant DB as Database
+    
+    System->>Provider: Redirect to provider onboarding
+    System->>Provider: Display onboarding flow
+    loop Steps 1-6
+        System->>Provider: Display step form
+        Provider->>System: Submit step data
+        System->>System: Validate data
+        alt Step 4: Documents
+            Provider->>System: Upload verification documents
+            System->>Verification: Submit for verification
+        end
+        System->>DB: Save progress
+    end
+    Provider->>System: Complete all steps
+    System->>DB: Create provider profile
+    alt Requires Approval
+        System->>Verification: Submit for approval
+        System->>Provider: Display pending status
+    else Auto-approved
+        System->>DB: Activate provider
+        System->>Provider: Redirect to dashboard
+    end
+```
 
 ### Main Flow
 1. System redirects newly registered provider to provider onboarding

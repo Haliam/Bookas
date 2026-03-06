@@ -4,7 +4,9 @@ This document provides a quick overview of all use cases in the Bookas applicati
 
 ## Summary
 
-**Total Use Cases**: 31+ core use cases covering all major functionality
+**Total Use Cases**: 31+ core use cases covering all major functionality  
+**Visualization**: All use cases include Mermaid sequence diagrams  
+**Documentation Format**: Structured with preconditions, flows, postconditions, and business rules
 
 ## Use Case Index by Category
 
@@ -185,6 +187,33 @@ Common error scenarios across use cases:
 - [Profile & Settings](./profile-settings.md) - UC-024 to UC-026
 - [Notifications & Reports](./notifications-reports.md) - UC-027 to UC-030
 - [Special Functions](./special-functions.md) - UC-031 to UC-034
+
+---
+
+## Visual Diagrams
+
+Each use case includes a **Mermaid sequence diagram** that visualizes:
+
+### Diagram Components
+- **Actors**: Users performing actions (Provider, Customer, Admin)
+- **System**: Main application logic
+- **Database**: Data persistence layer
+- **External Services**: Third-party integrations (Email, SMS, Payment, Calendar)
+- **Specialized Components**: Auth, Notification, Analytics, Storage services
+
+### Diagram Benefits
+- ✅ **Clear visualization** of actor-system interactions
+- ✅ **Easy to understand** complex workflows
+- ✅ **Decision points** and alternative paths shown visually
+- ✅ **Integration flows** with external services
+- ✅ **Renders automatically** in GitHub, VS Code, and documentation tools
+
+### Example Flow Patterns
+- **Simple CRUD**: User → System → Database → User
+- **With Validation**: User → System → Validation → Database (success/error)
+- **With External Service**: User → System → External API → Database → User
+- **With Notifications**: User → System → Database → Notification Service → Other Users
+- **Conflict Resolution**: System detects conflict → User resolves → System applies
 
 ---
 
