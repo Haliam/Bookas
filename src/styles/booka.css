@@ -1,0 +1,48 @@
+/* BookAs — Summer Ocean Breeze Design Tokens */
+:root {
+  /* Primary — Mint–Aqua–Denim */
+  --p-50:  #EAF9F6;
+  --p-100: #D6F3EE;
+  --p-200: #BEEAE5;
+  --p-300: #A2DCDC;
+  --p-400: #7FC7CF;
+  --p-500: #58AFC0;
+  --p-600: #3E86A7;
+  --p-700: #2E678A;
+  --p-800: #214C6E;
+  --p-900: #17385A;
+
+  /* Secondary — Coral */
+  --s-50:  #FFE8EA;
+  --s-100: #FFD1D5;
+  --s-200: #FFB0B8;
+  --s-300: #FF8E9A;
+  --s-400: #FF6F82;
+  --s-500: #E14F61;
+  --s-600: #C53E51;
+  --s-700: #A23043;
+  --s-800: #7F2435;
+  --s-900: #5B1A28;
+
+  /* Neutrals */
+  --g-50:  #F4FAF4;
+  --g-100: #EDF7F0;
+  --g-200: #E5E7EB;
+  --g-300: #D1D5DB;
+  --g-400: #9CA3AF;
+  --g-500: #6B7280;
+  --g-600: #4B5563;
+  --g-700: #374151;
+  --g-800: #1F2937;
+  --g-900: #111827;
+
+  /* Semantic */
+  --success: #1BBF8A;
+  --warning: #F5B11F;
+  --error:   #E94C59;
+  --info:    #2B77E5;
+
+  /* App layout */
+  --bottom-nav-h: 68px;
+  --top-bar-h: 56px;
+}
