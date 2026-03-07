@@ -1,5 +1,3 @@
-# Special Functions Use Cases
-
 ## UC-031: Offline Mode
 
 **Actor**: Provider or User  
@@ -170,8 +168,6 @@ sequenceDiagram
 - Network Information API for connection detection
 - Progressive Web App (PWA) capabilities enabled
 
----
-
 ## Additional Special Use Cases
 
 ### UC-032: Bulk Operations (Implicit)
@@ -222,8 +218,6 @@ sequenceDiagram
 - Help icon in navigation
 - Contextual help tooltips
 - Onboarding tutorials
-- Settings → Help & Support
-
----
+- Settings â†’ Help & Support
 
 *Last updated: March 6, 2026*

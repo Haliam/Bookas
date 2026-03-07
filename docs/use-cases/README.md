@@ -2,56 +2,39 @@
 
 This directory contains detailed use case documentation for the Bookas booking management system.
 
-## Use Case Categories
+## Use Cases (Sequential)
 
-### 1. Authentication & Access
-- [UC-001: User Registration](./authentication.md#uc-001-user-registration)
-- [UC-002: User Login](./authentication.md#uc-002-user-login)
-- [UC-003: Password Recovery](./authentication.md#uc-003-password-recovery)
-- [UC-004: Role Switching](./authentication.md#uc-004-role-switching)
-
-### 2. Onboarding
-- [UC-005: General User Onboarding](./onboarding.md#uc-005-general-user-onboarding)
-- [UC-006: Provider Onboarding](./onboarding.md#uc-006-provider-onboarding)
-
-### 3. Company Management
-- [UC-007: View Companies](./company-management.md#uc-007-view-companies)
-- [UC-008: Create Company](./company-management.md#uc-008-create-company)
-- [UC-009: Edit Company](./company-management.md#uc-009-edit-company)
-- [UC-010: Delete Company](./company-management.md#uc-010-delete-company)
-
-### 4. Service Management
-- [UC-011: View Services](./service-management.md#uc-011-view-services)
-- [UC-012: Create Service](./service-management.md#uc-012-create-service)
-- [UC-013: Edit Service](./service-management.md#uc-013-edit-service)
-- [UC-014: Delete Service](./service-management.md#uc-014-delete-service)
-
-### 5. Appointment Management
-- [UC-015: View Appointments](./appointment-management.md#uc-015-view-appointments)
-- [UC-016: View Appointment Details](./appointment-management.md#uc-016-view-appointment-details)
-- [UC-017: Accept/Reject Appointment](./appointment-management.md#uc-017-acceptreject-appointment)
-- [UC-018: Cancel Appointment](./appointment-management.md#uc-018-cancel-appointment)
-- [UC-019: Reschedule Appointment](./appointment-management.md#uc-019-reschedule-appointment)
-
-### 6. Calendar & Scheduling
-- [UC-020: View Calendar](./calendar-scheduling.md#uc-020-view-calendar)
-- [UC-021: Configure Working Hours](./calendar-scheduling.md#uc-021-configure-working-hours)
-- [UC-022: Block Time Slots](./calendar-scheduling.md#uc-022-block-time-slots)
-- [UC-023: Unblock Time Slots](./calendar-scheduling.md#uc-023-unblock-time-slots)
-
-### 7. Profile & Settings
-- [UC-024: View Provider Profile](./profile-settings.md#uc-024-view-provider-profile)
-- [UC-025: Edit Provider Profile](./profile-settings.md#uc-025-edit-provider-profile)
-- [UC-026: Manage Settings](./profile-settings.md#uc-026-manage-settings)
-
-### 8. Notifications & Reports
-- [UC-027: View Notifications](./notifications-reports.md#uc-027-view-notifications)
-- [UC-028: Manage Notification Preferences](./notifications-reports.md#uc-028-manage-notification-preferences)
-- [UC-029: Generate Reports](./notifications-reports.md#uc-029-generate-reports)
-- [UC-030: View Analytics Dashboard](./notifications-reports.md#uc-030-view-analytics-dashboard)
-
-### 9. Special Functions
-- [UC-031: Offline Mode](./special-functions.md#uc-031-offline-mode)
+- [UC-001: User Registration](./authentication/uc_001_user_registration.md)
+- [UC-002: User Login](./authentication/uc_002_user_login.md)
+- [UC-003: Password Recovery](./authentication/uc_003_password_recovery.md)
+- [UC-004: Role Switching](./authentication/uc_004_role_switching.md)
+- [UC-005: General User Onboarding](./onboarding/uc_001_general_user_onboarding.md)
+- [UC-006: Provider Onboarding](./onboarding/uc_002_provider_onboarding.md)
+- [UC-007: View Companies](./company-management/uc_001_view_companies.md)
+- [UC-008: Create Company](./company-management/uc_002_create_company.md)
+- [UC-009: Edit Company](./company-management/uc_003_edit_company.md)
+- [UC-010: Delete Company](./company-management/uc_004_delete_company.md)
+- [UC-011: View Services](./service-management/uc_001_view_services.md)
+- [UC-012: Create Service](./service-management/uc_002_create_service.md)
+- [UC-013: Edit Service](./service-management/uc_003_edit_service.md)
+- [UC-014: Delete Service](./service-management/uc_004_delete_service.md)
+- [UC-015: View Appointments](./appointment-management/uc_001_view_appointments.md)
+- [UC-016: View Appointment Details](./appointment-management/uc_002_view_appointment_details.md)
+- [UC-017: Accept/Reject Appointment](./appointment-management/uc_003_accept_reject_appointment.md)
+- [UC-018: Cancel Appointment](./appointment-management/uc_004_cancel_appointment.md)
+- [UC-019: Reschedule Appointment](./appointment-management/uc_005_reschedule_appointment.md)
+- [UC-020: View Calendar](./calendar-scheduling/uc_001_view_calendar.md)
+- [UC-021: Configure Working Hours](./calendar-scheduling/uc_002_configure_working_hours.md)
+- [UC-022: Block Time Slots](./calendar-scheduling/uc_003_block_time_slots.md)
+- [UC-023: Unblock Time Slots](./calendar-scheduling/uc_004_unblock_time_slots.md)
+- [UC-024: View Provider Profile](./profile-settings/uc_001_view_provider_profile.md)
+- [UC-025: Edit Provider Profile](./profile-settings/uc_002_edit_provider_profile.md)
+- [UC-026: Manage Settings](./profile-settings/uc_003_manage_settings.md)
+- [UC-027: View Notifications](./notifications-reports/uc_001_view_notifications.md)
+- [UC-028: Manage Notification Preferences](./notifications-reports/uc_002_manage_notification_preferences.md)
+- [UC-029: Generate Reports](./notifications-reports/uc_003_generate_reports.md)
+- [UC-030: View Analytics Dashboard](./notifications-reports/uc_004_view_analytics_dashboard.md)
+- [UC-031: Offline Mode](./special-functions/uc_001_offline_mode.md)
 
 ---
 
@@ -82,3 +65,6 @@ These diagrams render automatically in GitHub, VS Code, and other Markdown viewe
 ---
 
 *Last updated: March 6, 2026*
+
+
+

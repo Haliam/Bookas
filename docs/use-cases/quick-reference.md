@@ -178,15 +178,15 @@ Common error scenarios across use cases:
 ## Document Navigation
 
 **Detailed Use Case Documentation:**
-- [Authentication & Access](./authentication.md) - UC-001 to UC-004
-- [Onboarding](./onboarding.md) - UC-005 to UC-006
-- [Company Management](./company-management.md) - UC-007 to UC-010
-- [Service Management](./service-management.md) - UC-011 to UC-014
-- [Appointment Management](./appointment-management.md) - UC-015 to UC-019
-- [Calendar & Scheduling](./calendar-scheduling.md) - UC-020 to UC-023
-- [Profile & Settings](./profile-settings.md) - UC-024 to UC-026
-- [Notifications & Reports](./notifications-reports.md) - UC-027 to UC-030
-- [Special Functions](./special-functions.md) - UC-031 to UC-034
+- [Authentication & Access](./authentication/index.md) - UC-001 to UC-004
+- [Onboarding](./onboarding/index.md) - UC-005 to UC-006
+- [Company Management](./company-management/index.md) - UC-007 to UC-010
+- [Service Management](./service-management/index.md) - UC-011 to UC-014
+- [Appointment Management](./appointment-management/index.md) - UC-015 to UC-019
+- [Calendar & Scheduling](./calendar-scheduling/index.md) - UC-020 to UC-023
+- [Profile & Settings](./profile-settings/index.md) - UC-024 to UC-026
+- [Notifications & Reports](./notifications-reports/index.md) - UC-027 to UC-030
+- [Special Functions](./special-functions/index.md) - UC-031 to UC-034
 
 ---
 
