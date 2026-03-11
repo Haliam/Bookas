@@ -59,7 +59,7 @@ flowchart LR
 
 ## Use Cases
 
-**28 use cases** across 8 sections. UC-001 → UC-028 follow the provider journey in order.
+**28 use cases** across 9 sections. UC-001 → UC-028 follow the provider journey in order.
 
 ### Registration
 
@@ -109,20 +109,27 @@ flowchart LR
 | [UC-020](./05-appointments/uc_020_accept_decline_appointment.md) | Accept / Decline Appointment | `/provider/appointments/:id` |
 | [UC-021](./05-appointments/uc_021_reschedule_appointment.md) | Reschedule Appointment | `/provider/appointments/:id` |
 | [UC-022](./05-appointments/uc_022_cancel_appointment.md) | Cancel Appointment | `/provider/appointments/:id` |
-| [UC-023](./05-appointments/uc_023_view_notifications.md) | View Notifications | `/provider/notifications` |
+
+### Notifications
+
+| ID | Use Case | Page |
+|----|----------|------|
+| [UC-023](./06-notifications/uc_023_view_notifications.md) | View Notifications | `/provider/notifications` |
+
+> Accessible from the TopBar bell icon. Cross-cutting feed covering appointment events, payments, profile updates and system messages.
 
 ### Profile
 
 | ID | Use Case | Page |
 |----|----------|------|
-| [UC-024](./06-profile/uc_024_edit_provider_profile.md) | Edit Provider Profile | `/provider/profile` |
-| [UC-025](./06-profile/uc_025_view_provider_profile.md) | View Provider Profile | `/provider/profile` |
+| [UC-024](./07-profile/uc_024_edit_provider_profile.md) | Edit Provider Profile | `/provider/profile` |
+| [UC-025](./07-profile/uc_025_view_provider_profile.md) | View Provider Profile | `/provider/profile` |
 
 ### Analytics
 
 | ID | Use Case | Page |
 |----|----------|------|
-| [UC-026](./07-analytics/uc_026_view_analytics_dashboard.md) | View Analytics Dashboard | `/provider` (dashboard) |
+| [UC-026](./08-analytics/uc_026_view_analytics_dashboard.md) | View Analytics Dashboard | `/provider` (dashboard) |
 
 > MVP: 5 summary cards (today / this week / this month / pending / cancelled) + next upcoming appointment. Charts, revenue and export are post-MVP.
 
@@ -130,8 +137,8 @@ flowchart LR
 
 | ID | Use Case | Page |
 |----|----------|------|
-| [UC-027](./08-settings/uc_027_manage_settings.md) | Manage Settings | `/provider/settings` |
-| [UC-028](./08-settings/uc_028_manage_notification_preferences.md) | Notification Preferences | `/provider/settings` |
+| [UC-027](./09-settings/uc_027_manage_settings.md) | Manage Settings | `/provider/settings` |
+| [UC-028](./09-settings/uc_028_manage_notification_preferences.md) | Notification Preferences | `/provider/settings` |
 
 > UC-028 is a section within the Settings page, not a separate screen.
 
