@@ -63,75 +63,75 @@ flowchart LR
 
 ### Registration
 
-| ID | Use Case | Page | Priority |
-|----|----------|------|----------|
-| [UC-001](./authentication/uc_001_user_registration.md) | User Registration | `/register` | High |
-| [UC-002](./authentication/uc_002_user_login.md) | User Login | `/login` | High |
-| [UC-003](./authentication/uc_003_password_recovery.md) | Password Recovery | `/forgot-password` | Medium |
-| [UC-004](./onboarding/uc_002_provider_onboarding.md) | Provider Onboarding | `/onboarding-provider` | High |
+| ID | Use Case | Page |
+|----|----------|------|
+| [UC-001](./01-registration/uc_001_user_registration.md) | User Registration | `/register` |
+| [UC-002](./01-registration/uc_002_user_login.md) | User Login | `/login` |
+| [UC-003](./01-registration/uc_003_password_recovery.md) | Password Recovery | `/forgot-password` |
+| [UC-004](./01-registration/uc_004_provider_onboarding.md) | Provider Onboarding | `/onboarding-provider` |
 
 > UC-004: 3 welcome slides followed by a forced redirect into company creation. Skippable but always ends at Create Company.
 
 ### Company
 
-| ID | Use Case | Page | Priority |
-|----|----------|------|----------|
-| [UC-005](./company-management/uc_002_create_company.md) | Create Company | `/provider/companies/create` | High |
-| [UC-006](./company-management/uc_003_edit_company.md) | Edit Company | `/provider/companies/:id/edit` | Medium |
-| [UC-007](./company-management/uc_004_delete_company.md) | Delete Company | `/provider/companies` | Medium |
-| [UC-008](./company-management/uc_001_view_companies.md) | View Companies | `/provider/companies` | High |
-| [UC-009](./special-functions/uc_002_share_booking_link.md) | Share Booking Link | `/provider/companies/:id` | High |
+| ID | Use Case | Page |
+|----|----------|------|
+| [UC-005](./02-company/uc_005_create_company.md) | Create Company | `/provider/companies/create` |
+| [UC-006](./02-company/uc_006_edit_company.md) | Edit Company | `/provider/companies/:id/edit` |
+| [UC-007](./02-company/uc_007_delete_company.md) | Delete Company | `/provider/companies` |
+| [UC-008](./02-company/uc_008_view_companies.md) | View Companies | `/provider/companies` |
+| [UC-009](./02-company/uc_009_share_booking_link.md) | Share Booking Link | `/provider/companies/:id` |
 
 ### Services
 
-| ID | Use Case | Page | Priority |
-|----|----------|------|----------|
-| [UC-010](./service-management/uc_002_create_service.md) | Create Service | `/provider/companies/:id/services/create` | High |
-| [UC-011](./service-management/uc_003_edit_service.md) | Edit Service | `/provider/companies/:id/services` | Medium |
-| [UC-012](./service-management/uc_004_delete_service.md) | Delete Service | `/provider/companies/:id/services` | Medium |
-| [UC-013](./service-management/uc_001_view_services.md) | View Services | `/provider/companies/:id/services` | High |
+| ID | Use Case | Page |
+|----|----------|------|
+| [UC-010](./03-services/uc_010_create_service.md) | Create Service | `/provider/companies/:id/services/create` |
+| [UC-011](./03-services/uc_011_edit_service.md) | Edit Service | `/provider/companies/:id/services` |
+| [UC-012](./03-services/uc_012_delete_service.md) | Delete Service | `/provider/companies/:id/services` |
+| [UC-013](./03-services/uc_013_view_services.md) | View Services | `/provider/companies/:id/services` |
 
 ### Calendar
 
-| ID | Use Case | Page | Priority |
-|----|----------|------|----------|
-| [UC-014](./calendar-scheduling/uc_002_configure_working_hours.md) | Configure Working Hours | `/provider/hours` | High |
-| [UC-015](./calendar-scheduling/uc_003_block_time_slots.md) | Block Time Slots | `/provider/block-time` | Medium |
-| [UC-016](./calendar-scheduling/uc_004_unblock_time_slots.md) | Unblock Time Slots | `/provider/block-time` | Medium |
-| [UC-017](./calendar-scheduling/uc_001_view_calendar.md) | View Calendar | `/provider/calendar` | High |
+| ID | Use Case | Page |
+|----|----------|------|
+| [UC-014](./04-calendar/uc_014_configure_working_hours.md) | Configure Working Hours | `/provider/hours` |
+| [UC-015](./04-calendar/uc_015_block_time_slots.md) | Block Time Slots | `/provider/block-time` |
+| [UC-016](./04-calendar/uc_016_unblock_time_slots.md) | Unblock Time Slots | `/provider/block-time` |
+| [UC-017](./04-calendar/uc_017_view_calendar.md) | View Calendar | `/provider/calendar` |
 
 ### Appointments
 
-| ID | Use Case | Page | Priority |
-|----|----------|------|----------|
-| [UC-018](./appointment-management/uc_001_view_appointments.md) | View Appointments | `/provider/appointments` | High |
-| [UC-019](./appointment-management/uc_002_view_appointment_details.md) | View Appointment Details | `/provider/appointments/:id` | High |
-| [UC-020](./appointment-management/uc_003_accept_reject_appointment.md) | Accept / Decline Appointment | `/provider/appointments/:id` | Critical |
-| [UC-021](./appointment-management/uc_005_reschedule_appointment.md) | Reschedule Appointment | `/provider/appointments/:id` | High |
-| [UC-022](./appointment-management/uc_004_cancel_appointment.md) | Cancel Appointment | `/provider/appointments/:id` | High |
-| [UC-023](./notifications-reports/uc_001_view_notifications.md) | View Notifications | `/provider/notifications` | High |
+| ID | Use Case | Page |
+|----|----------|------|
+| [UC-018](./05-appointments/uc_018_view_appointments.md) | View Appointments | `/provider/appointments` |
+| [UC-019](./05-appointments/uc_019_view_appointment_details.md) | View Appointment Details | `/provider/appointments/:id` |
+| [UC-020](./05-appointments/uc_020_accept_decline_appointment.md) | Accept / Decline Appointment | `/provider/appointments/:id` |
+| [UC-021](./05-appointments/uc_021_reschedule_appointment.md) | Reschedule Appointment | `/provider/appointments/:id` |
+| [UC-022](./05-appointments/uc_022_cancel_appointment.md) | Cancel Appointment | `/provider/appointments/:id` |
+| [UC-023](./05-appointments/uc_023_view_notifications.md) | View Notifications | `/provider/notifications` |
 
 ### Profile
 
-| ID | Use Case | Page | Priority |
-|----|----------|------|----------|
-| [UC-024](./profile-settings/uc_002_edit_provider_profile.md) | Edit Provider Profile | `/provider/profile` | Medium |
-| [UC-025](./profile-settings/uc_001_view_provider_profile.md) | View Provider Profile | `/provider/profile` | Medium |
+| ID | Use Case | Page |
+|----|----------|------|
+| [UC-024](./06-profile/uc_024_edit_provider_profile.md) | Edit Provider Profile | `/provider/profile` |
+| [UC-025](./06-profile/uc_025_view_provider_profile.md) | View Provider Profile | `/provider/profile` |
 
 ### Analytics
 
-| ID | Use Case | Page | Priority |
-|----|----------|------|----------|
-| [UC-026](./notifications-reports/uc_004_view_analytics_dashboard.md) | View Analytics Dashboard | `/provider` (dashboard) | High |
+| ID | Use Case | Page |
+|----|----------|------|
+| [UC-026](./07-analytics/uc_026_view_analytics_dashboard.md) | View Analytics Dashboard | `/provider` (dashboard) |
 
 > MVP: 5 summary cards (today / this week / this month / pending / cancelled) + next upcoming appointment. Charts, revenue and export are post-MVP.
 
 ### Settings
 
-| ID | Use Case | Page | Priority |
-|----|----------|------|----------|
-| [UC-027](./profile-settings/uc_003_manage_settings.md) | Manage Settings | `/provider/settings` | Medium |
-| [UC-028](./notifications-reports/uc_002_manage_notification_preferences.md) | Notification Preferences | `/provider/settings` | Medium |
+| ID | Use Case | Page |
+|----|----------|------|
+| [UC-027](./08-settings/uc_027_manage_settings.md) | Manage Settings | `/provider/settings` |
+| [UC-028](./08-settings/uc_028_manage_notification_preferences.md) | Notification Preferences | `/provider/settings` |
 
 > UC-028 is a section within the Settings page, not a separate screen.
 
