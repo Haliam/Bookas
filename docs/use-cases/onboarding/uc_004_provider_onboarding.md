@@ -1,4 +1,4 @@
-## UC-006: Provider Onboarding
+## UC-004: Provider Onboarding
 
 **Actor**: New Provider  
 **Preconditions**: User has registered with Provider role  

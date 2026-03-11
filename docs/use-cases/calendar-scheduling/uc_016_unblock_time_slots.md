@@ -1,4 +1,4 @@
-## UC-023: Unblock Time Slots
+## UC-016: Unblock Time Slots
 
 **Actor**: Provider  
 **Preconditions**: Provider has blocked time slots  

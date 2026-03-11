@@ -1,4 +1,4 @@
-## UC-014: Delete Service
+## UC-012: Delete Service
 
 **Actor**: Provider  
 **Preconditions**: Provider owns the company and service  

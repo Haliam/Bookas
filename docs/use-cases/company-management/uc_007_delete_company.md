@@ -1,4 +1,4 @@
-## UC-010: Delete Company
+## UC-007: Delete Company
 
 **Actor**: Provider  
 **Preconditions**: Provider owns the company  

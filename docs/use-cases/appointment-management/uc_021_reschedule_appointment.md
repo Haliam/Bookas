@@ -1,4 +1,4 @@
-## UC-019: Reschedule Appointment
+## UC-021: Reschedule Appointment
 
 **Actor**: Provider  
 **Preconditions**: Appointment exists and is not completed  
