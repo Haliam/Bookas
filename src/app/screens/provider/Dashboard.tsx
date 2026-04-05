@@ -32,11 +32,13 @@ export function ProviderDashboard() {
           </div>
           <button
             onClick={() => navigate("/provider/notifications")}
-            className="w-10 h-10 rounded-full bg-[#F5F5F5] flex items-center justify-center relative hover:bg-[#E8E8E8] transition-colors"
+            className="w-12 h-12 rounded-full bg-[#F5F5F5] flex items-center justify-center relative hover:bg-[#E8E8E8] transition-colors mr-2"
           >
-            <Bell size={18} className="text-[#2C2C2C]" />
+            <Bell size={22} className="text-[#2C2C2C]" />
             {unreadNotifications > 0 && (
-              <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#E94C59]" />
+              <div className="absolute top-1 right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#E94C59] flex items-center justify-center">
+                <span className="text-white text-[10px] font-semibold leading-none">{unreadNotifications}</span>
+              </div>
             )}
           </button>
         </div>
