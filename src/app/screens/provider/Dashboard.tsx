@@ -19,7 +19,10 @@ export function ProviderDashboard() {
 
   const firstName = user.name.split(" ")[0];
   const today = new Date().toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" });
-  const upcomingAppts = PROVIDER_APPOINTMENTS.slice(0, 5);
+  const upcomingAppts = PROVIDER_APPOINTMENTS
+    .filter(a => a.status === "confirmed")
+    .sort((a, b) => a.time.localeCompare(b.time))
+    .slice(0, 5);
 
   return (
     <div className="min-h-screen bg-white">

@@ -1,128 +1,65 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { Clock, Search, Filter } from "lucide-react";
+import { Clock } from "lucide-react";
 import { PROVIDER_APPOINTMENTS } from "../../data/mockData";
 import { StatusBadge } from "../../components/ui/Badge";
 import { EmptyState } from "../../components/ui/EmptyState";
 import { TopBar } from "../../components/navigation/TopBar";
 
-type Filter2 = "all" | "confirmed" | "pending" | "completed" | "cancelled";
+type FilterTab = "confirmed" | "pending" | "cancelled";
 
 export function ProviderAppointments() {
   const navigate = useNavigate();
-  const [filter, setFilter] = useState<Filter2>("all");
-  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState<FilterTab>("confirmed");
 
-  const filtered = PROVIDER_APPOINTMENTS.filter(a => {
-    const matchFilter = filter === "all" || a.status === filter;
-    const matchSearch = !search || a.serviceName.toLowerCase().includes(search.toLowerCase());
-    return matchFilter && matchSearch;
-  });
+  const filtered = PROVIDER_APPOINTMENTS
+    .filter(a => a.status === filter)
+    .sort((a, b) => a.time.localeCompare(b.time));
 
-  const statusCounts = {
-    all: PROVIDER_APPOINTMENTS.length,
-    confirmed: PROVIDER_APPOINTMENTS.filter(a => a.status === "confirmed").length,
-    pending: PROVIDER_APPOINTMENTS.filter(a => a.status === "pending").length,
-    completed: PROVIDER_APPOINTMENTS.filter(a => a.status === "completed").length,
-    cancelled: PROVIDER_APPOINTMENTS.filter(a => a.status === "cancelled").length,
-  };
-
-  const filterLabels: Record<Filter2, string> = {
-    all: "Todas",
-    confirmed: "Confirmadas",
-    pending: "Pendientes",
-    completed: "Completadas",
-    cancelled: "Canceladas",
-  };
-
-  const today = new Date().toISOString().split("T")[0];
-  const todayAppts = filtered.filter(a => a.date === "2026-03-01");
-  const otherAppts = filtered.filter(a => a.date !== "2026-03-01");
+  const tabs: { key: FilterTab; label: string }[] = [
+    { key: "confirmed", label: "Confirmadas" },
+    { key: "pending", label: "Pendientes" },
+    { key: "cancelled", label: "Canceladas" },
+  ];
 
   return (
     <div className="min-h-screen bg-white">
       <TopBar title="Citas" light />
 
-      <div className="px-5 pb-4">
-        {/* Search */}
-        <div className="relative mb-4">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]" />
-          <input
-            type="text"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder="Buscar servicio o cliente..."
-            className="w-full h-11 bg-[#FAFAFA] rounded-2xl pl-10 pr-4 text-sm text-[#2C2C2C] placeholder:text-[#9CA3AF] border border-[#F0F0F0] focus:outline-none focus:border-[#E0E0E0]"
-          />
-        </div>
+      {/* Tabs */}
+      <div className="flex border-b border-[#F0F0F0] px-5">
+        {tabs.map(({ key, label }) => (
+          <button
+            key={key}
+            onClick={() => setFilter(key)}
+            className={`flex-1 py-3 text-sm font-medium transition-colors relative ${
+              filter === key ? "text-[#2C2C2C]" : "text-[#9CA3AF]"
+            }`}
+          >
+            {label}
+            {filter === key && (
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#2C2C2C] rounded-full" />
+            )}
+          </button>
+        ))}
+      </div>
 
-        {/* Filter pills */}
-        <div className="flex gap-2 overflow-x-auto scrollbar-none pb-4">
-          {(Object.keys(filterLabels) as Filter2[]).map(f => {
-            const count = statusCounts[f];
-            return (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-full whitespace-nowrap text-xs shrink-0 transition-all ${
-                  filter === f
-                    ? "bg-[#2C2C2C] text-white"
-                    : "bg-[#FAFAFA] text-[#6B7280] border border-[#F0F0F0]"
-                }`}
-              >
-                {filterLabels[f]}
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                  filter === f ? "bg-white/20 text-white" : "bg-white text-[#9CA3AF]"
-                }`}>
-                  {count}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Results */}
+      <div className="px-5 py-6">
         {filtered.length === 0 ? (
           <EmptyState
             emoji="📋"
             title="Sin citas"
-            description="No hay citas que coincidan con los filtros aplicados"
+            description="No hay citas en esta categoría"
           />
         ) : (
-          <div className="flex flex-col gap-5">
-            {/* Today */}
-            {todayAppts.length > 0 && (
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-2 h-2 rounded-full bg-[#2C2C2C]" />
-                  <p className="text-xs text-[#6B7280] font-medium">Hoy</p>
-                </div>
-                <div className="flex flex-col gap-2">
-                  {todayAppts.map(appt => (
-                    <AppointmentRow
-                      key={appt.id}
-                      appt={appt}
-                      onClick={() => navigate(`/provider/appointments/${appt.id}`)}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {otherAppts.length > 0 && (
-              <div>
-                <p className="text-xs text-[#6B7280] font-medium mb-2">Otros</p>
-                <div className="flex flex-col gap-2">
-                  {otherAppts.map(appt => (
-                    <AppointmentRow
-                      key={appt.id}
-                      appt={appt}
-                      onClick={() => navigate(`/provider/appointments/${appt.id}`)}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
+          <div className="flex flex-col gap-3">
+            {filtered.map(appt => (
+              <AppointmentCard
+                key={appt.id}
+                appt={appt}
+                onClick={() => navigate(`/provider/appointments/${appt.id}`)}
+              />
+            ))}
           </div>
         )}
       </div>
@@ -130,27 +67,27 @@ export function ProviderAppointments() {
   );
 }
 
-function AppointmentRow({ appt, onClick }: { appt: any; onClick: () => void }) {
+function AppointmentCard({ appt, onClick }: { appt: any; onClick: () => void }) {
   return (
     <div
       onClick={onClick}
-      className="bg-[#FAFAFA] rounded-2xl p-4 cursor-pointer hover:bg-[#F5F5F5] transition-colors border border-[#F0F0F0]"
+      className="bg-white border border-[#E5E7EB] rounded-2xl p-4 cursor-pointer hover:border-[#D1D5DB] hover:shadow-sm transition-all"
     >
-      <div className="flex items-start justify-between gap-3 mb-2">
+      <div className="flex items-start justify-between gap-3 mb-3">
         <div>
           <p className="text-sm font-medium text-[#2C2C2C]">{appt.serviceName}</p>
-          <p className="text-xs text-[#9CA3AF]">Cliente · Reserva #{appt.id.toUpperCase()}</p>
+          <p className="text-xs text-[#9CA3AF] mt-0.5">Reserva #{appt.id.toUpperCase()}</p>
         </div>
         <StatusBadge status={appt.status} />
       </div>
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-1">
+      <div className="flex items-center gap-3 text-xs text-[#6B7280]">
+        <span className="flex items-center gap-1">
           <Clock size={11} className="text-[#9CA3AF]" />
-          <span className="text-xs text-[#6B7280]">{appt.time} · {appt.duration}min</span>
-        </div>
-        <div className="w-1 h-1 rounded-full bg-[#E0E0E0]" />
-        <span className="text-xs text-[#6B7280]">{new Date(appt.date + "T12:00").toLocaleDateString("es-ES", { day: "numeric", month: "short" })}</span>
-        <span className="text-sm font-medium text-[#2C2C2C] ml-auto">{appt.price}€</span>
+          {appt.time} · {appt.duration}min
+        </span>
+        <span className="w-1 h-1 rounded-full bg-[#E0E0E0]" />
+        <span>{new Date(appt.date + "T12:00").toLocaleDateString("es-ES", { day: "numeric", month: "short" })}</span>
+        <span className="font-medium text-[#2C2C2C] ml-auto">{appt.price}€</span>
       </div>
     </div>
   );
