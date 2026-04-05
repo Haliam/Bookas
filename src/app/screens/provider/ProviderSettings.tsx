@@ -20,6 +20,15 @@ export function ProviderSettings() {
     setNotifications(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const [bookingSettings, setBookingSettings] = useState({
+    autoConfirm: true,
+    buffer: true,
+  });
+
+  const toggleBooking = (key: keyof typeof bookingSettings) => {
+    setBookingSettings(prev => ({ ...prev, [key]: !prev[key] }));
+  };
+
   const Switch = ({ value, onChange }: { value: boolean; onChange: () => void }) => (
     <button
       onClick={onChange}
@@ -66,18 +75,24 @@ export function ProviderSettings() {
         <div>
           <p className="text-xs text-[#9CA3AF] uppercase tracking-widest mb-2 px-1">Reservas</p>
           <div className="bg-white rounded-2xl shadow-[0_1px_6px_rgba(0,0,0,0.05)] overflow-hidden">
-            {[
-              { label: "Confirmación automática", desc: "Confirmar reservas sin revisión manual" },
-              { label: "Buffer entre citas", desc: "15 min de descanso entre servicios" },
-            ].map(({ label, desc }, i) => (
-              <div key={label} className={`flex items-center justify-between p-4 ${i > 0 ? "border-t border-[#F4FAF4]" : ""}`}>
-                <div>
-                  <p className="text-sm text-[#111827]">{label}</p>
-                  <p className="text-xs text-[#9CA3AF]">{desc}</p>
-                </div>
-                <Switch value={i === 0} onChange={() => {}} />
+            <div className="flex items-center justify-between p-4">
+              <div className="flex-1 pr-4">
+                <p className="text-sm text-[#111827]">Confirmación automática</p>
+                <p className="text-xs text-[#9CA3AF] mt-0.5">
+                  {bookingSettings.autoConfirm
+                    ? "Las reservas con hueco disponible se confirman al instante"
+                    : "Debes aprobar manualmente cada solicitud de reserva"}
+                </p>
               </div>
-            ))}
+              <Switch value={bookingSettings.autoConfirm} onChange={() => toggleBooking("autoConfirm")} />
+            </div>
+            <div className="flex items-center justify-between p-4 border-t border-[#F4FAF4]">
+              <div className="flex-1 pr-4">
+                <p className="text-sm text-[#111827]">Buffer entre citas</p>
+                <p className="text-xs text-[#9CA3AF] mt-0.5">15 min de descanso entre servicios</p>
+              </div>
+              <Switch value={bookingSettings.buffer} onChange={() => toggleBooking("buffer")} />
+            </div>
           </div>
         </div>
 
