@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { Bell, TrendingUp, Calendar, Clock, Building2 } from "lucide-react";
+import { Bell, Calendar } from "lucide-react";
 import { useApp } from "../../context/AppContext";
-import { PROVIDER_STATS, PROVIDER_APPOINTMENTS } from "../../data/mockData";
+import { PROVIDER_APPOINTMENTS } from "../../data/mockData";
 import { StatusBadge } from "../../components/ui/Badge";
 import { SkeletonList } from "../../components/ui/Skeleton";
 
@@ -19,7 +19,7 @@ export function ProviderDashboard() {
 
   const firstName = user.name.split(" ")[0];
   const today = new Date().toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" });
-  const todayAppts = PROVIDER_APPOINTMENTS.filter(a => a.date === "2026-03-01");
+  const upcomingAppts = PROVIDER_APPOINTMENTS.slice(0, 5);
 
   return (
     <div className="min-h-screen bg-white">
@@ -40,71 +40,34 @@ export function ProviderDashboard() {
             )}
           </button>
         </div>
-
-        {/* Quick stats */}
-        <div className="grid grid-cols-3 gap-3">
-          <div className="text-center p-3">
-            <p className="text-[#2C2C2C] font-semibold text-xl">{PROVIDER_STATS.rating}</p>
-            <p className="text-[#9CA3AF] text-xs mt-1">Rating</p>
-          </div>
-          <div className="text-center p-3 border-x border-[#F0F0F0]">
-            <p className="text-[#2C2C2C] font-semibold text-xl">{PROVIDER_STATS.todayAppointments}</p>
-            <p className="text-[#9CA3AF] text-xs mt-1">Hoy</p>
-          </div>
-          <div className="text-center p-3">
-            <p className="text-[#2C2C2C] font-semibold text-xl">{PROVIDER_STATS.totalClients}</p>
-            <p className="text-[#9CA3AF] text-xs mt-1">Clientes</p>
-          </div>
-        </div>
       </div>
 
       <div className="px-5 py-6">
-        {/* Quick actions */}
+        {/* Upcoming appointments */}
         <div className="mb-8">
-          <h2 className="text-[#2C2C2C] font-medium mb-4">Acciones rápidas</h2>
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              { label: "Mis negocios", icon: Building2, action: () => navigate("/provider/companies") },
-              { label: "Calendario", icon: Calendar, action: () => navigate("/provider/calendar") },
-              { label: "Reportes", icon: TrendingUp, action: () => navigate("/provider/reports") },
-              { label: "Citas", icon: Clock, action: () => navigate("/provider/appointments") },
-            ].map(({ label, icon: Icon, action }) => (
-              <button
-                key={label}
-                onClick={action}
-                className="flex items-center gap-3 p-4 bg-[#FAFAFA] rounded-2xl hover:bg-[#F5F5F5] transition-colors text-left"
-              >
-                <Icon size={20} className="text-[#6B7280]" />
-                <span className="text-sm text-[#2C2C2C] font-medium">{label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Today's appointments */}
-        <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-[#2C2C2C] font-medium">Citas de hoy</h2>
+            <h2 className="text-[#2C2C2C] font-medium">Próximas citas</h2>
             <button
               onClick={() => navigate("/provider/appointments")}
-              className="text-xs text-[#6B7280] hover:text-[#2C2C2C] transition-colors"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F5] hover:bg-[#E8E8E8] transition-colors"
+              title="Ver todas las citas del día"
             >
-              Ver todas →
+              <Calendar size={16} className="text-[#6B7280]" />
             </button>
           </div>
 
           {loading ? (
             <SkeletonList count={3} />
-          ) : todayAppts.length === 0 ? (
+          ) : upcomingAppts.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-[#9CA3AF] text-sm">No hay citas programadas para hoy</p>
+              <p className="text-[#9CA3AF] text-sm">No hay citas programadas</p>
             </div>
           ) : (
             <div className="space-y-3">
-              {todayAppts.map(appt => (
+              {upcomingAppts.map(appt => (
                 <div
                   key={appt.id}
-                  className="p-4 bg-[#FAFAFA] rounded-2xl hover:bg-[#F5F5F5] transition-colors cursor-pointer"
+                  className="p-4 bg-white border border-[#E5E7EB] rounded-2xl hover:border-[#D1D5DB] hover:shadow-sm transition-all cursor-pointer"
                   onClick={() => navigate(`/provider/appointments/${appt.id}`)}
                 >
                   <div className="flex items-center justify-between mb-2">
@@ -112,10 +75,7 @@ export function ProviderDashboard() {
                     <StatusBadge status={appt.status} />
                   </div>
                   <div className="flex items-center gap-4 text-xs text-[#6B7280]">
-                    <span className="flex items-center gap-1">
-                      <Clock size={12} />
-                      {appt.time}
-                    </span>
+                    <span>{appt.time}</span>
                     <span>{appt.clientName}</span>
                   </div>
                 </div>
@@ -123,6 +83,8 @@ export function ProviderDashboard() {
             </div>
           )}
         </div>
+
+
       </div>
     </div>
   );

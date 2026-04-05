@@ -294,4 +294,18 @@ export const PROVIDER_APPOINTMENTS: Appointment[] = [
     status: "completed",
     providerName: "Laura Méndez",
   },
+  {
+    id: "pa5",
+    companyId: "c1",
+    companyName: "Zen Wellness Studio",
+    companyImage: "https://images.unsplash.com/photo-1763978485095-1cd13f4d3cb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx6ZW4lMjBzcGElMjB3ZWxsbmVzcyUyMG1pbmltYWwlMjBpbnRlcmlvcnxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s2",
+    serviceName: "Aromaterapia Premium",
+    date: "2026-03-02",
+    time: "10:30",
+    duration: 90,
+    price: 90,
+    status: "confirmed",
+    providerName: "Laura Méndez",
+  },
 ];
