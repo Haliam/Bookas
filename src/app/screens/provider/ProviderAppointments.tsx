@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router";
 import { Clock } from "lucide-react";
 import { PROVIDER_APPOINTMENTS } from "../../data/mockData";
@@ -8,13 +8,56 @@ import { TopBar } from "../../components/navigation/TopBar";
 
 type FilterTab = "confirmed" | "pending" | "cancelled";
 
+const PAGE_SIZE = 5;
+
+function formatDayLabel(date: string, firstDate: string): string {
+  const nextDay = new Date(firstDate + "T12:00");
+  nextDay.setDate(nextDay.getDate() + 1);
+  const tomorrowStr = nextDay.toISOString().split("T")[0];
+  if (date === firstDate) return "Hoy";
+  if (date === tomorrowStr) return "Mañana";
+  return new Date(date + "T12:00").toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" });
+}
+
 export function ProviderAppointments() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState<FilterTab>("confirmed");
+  const [page, setPage] = useState(1);
+  const loaderRef = useRef<HTMLDivElement>(null);
 
-  const filtered = PROVIDER_APPOINTMENTS
+  const allFiltered = PROVIDER_APPOINTMENTS
     .filter(a => a.status === filter)
-    .sort((a, b) => a.time.localeCompare(b.time));
+    .sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
+
+  const firstDate = allFiltered[0]?.date ?? "";
+
+  const visible = allFiltered.slice(0, page * PAGE_SIZE);
+  const hasMore = visible.length < allFiltered.length;
+
+  // Group by date
+  const grouped = visible.reduce<Record<string, typeof visible>>((acc, appt) => {
+    if (!acc[appt.date]) acc[appt.date] = [];
+    acc[appt.date].push(appt);
+    return acc;
+  }, {});
+
+  const loadMore = useCallback(() => {
+    if (hasMore) setPage(p => p + 1);
+  }, [hasMore]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [filter]);
+
+  useEffect(() => {
+    const el = loaderRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) loadMore();
+    }, { threshold: 0.1 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [loadMore]);
 
   const tabs: { key: FilterTab; label: string }[] = [
     { key: "confirmed", label: "Confirmadas" },
@@ -45,21 +88,34 @@ export function ProviderAppointments() {
       </div>
 
       <div className="px-5 py-6">
-        {filtered.length === 0 ? (
+        {allFiltered.length === 0 ? (
           <EmptyState
             emoji="📋"
             title="Sin citas"
             description="No hay citas en esta categoría"
           />
         ) : (
-          <div className="flex flex-col gap-3">
-            {filtered.map(appt => (
-              <AppointmentCard
-                key={appt.id}
-                appt={appt}
-                onClick={() => navigate(`/provider/appointments/${appt.id}`)}
-              />
+          <div className="flex flex-col gap-6">
+            {Object.entries(grouped).map(([date, appts]) => (
+              <div key={date}>
+                <p className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-3 capitalize">
+                  {formatDayLabel(date, firstDate)}
+                </p>
+                <div className="flex flex-col gap-3">
+                  {appts.map(appt => (
+                    <AppointmentCard
+                      key={appt.id}
+                      appt={appt}
+                      onClick={() => navigate(`/provider/appointments/${appt.id}`)}
+                    />
+                  ))}
+                </div>
+              </div>
             ))}
+            {/* Infinite scroll sentinel */}
+            <div ref={loaderRef} className="h-8 flex items-center justify-center">
+              {hasMore && <span className="text-xs text-[#9CA3AF]">Cargando...</span>}
+            </div>
           </div>
         )}
       </div>
@@ -86,7 +142,6 @@ function AppointmentCard({ appt, onClick }: { appt: any; onClick: () => void }) 
           {appt.time} · {appt.duration}min
         </span>
         <span className="w-1 h-1 rounded-full bg-[#E0E0E0]" />
-        <span>{new Date(appt.date + "T12:00").toLocaleDateString("es-ES", { day: "numeric", month: "short" })}</span>
         <span className="font-medium text-[#2C2C2C] ml-auto">{appt.price}€</span>
       </div>
     </div>

@@ -19,10 +19,9 @@ export function ProviderDashboard() {
 
   const firstName = user.name.split(" ")[0];
   const today = new Date().toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" });
-  const upcomingAppts = PROVIDER_APPOINTMENTS
-    .filter(a => a.status === "confirmed")
-    .sort((a, b) => a.time.localeCompare(b.time))
-    .slice(0, 5);
+  const confirmedAppts = PROVIDER_APPOINTMENTS.filter(a => a.status === "confirmed").sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
+  const todayStr = confirmedAppts[0]?.date ?? new Date().toISOString().split("T")[0];
+  const upcomingAppts = confirmedAppts.filter(a => a.date === todayStr).slice(0, 5);
 
   return (
     <div className="min-h-screen bg-white">
@@ -51,7 +50,7 @@ export function ProviderDashboard() {
         {/* Upcoming appointments */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-[#2C2C2C] font-medium">Próximas citas</h2>
+            <h2 className="text-[#2C2C2C] font-medium">Citas de hoy</h2>
             <button
               onClick={() => navigate("/provider/appointments")}
               className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F5] hover:bg-[#E8E8E8] transition-colors"
@@ -81,7 +80,7 @@ export function ProviderDashboard() {
                   </div>
                   <div className="flex items-center gap-4 text-xs text-[#6B7280]">
                     <span>{appt.time}</span>
-                    <span>{appt.clientName}</span>
+                    <span>{appt.providerName}</span>
                   </div>
                 </div>
               ))}
