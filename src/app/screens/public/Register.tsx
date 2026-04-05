@@ -46,8 +46,20 @@ export function Register() {
         <div className="bg-white rounded-3xl p-8 shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-6">
           <div className="space-y-5">
             <Input
-              label="Nombre completo"
+              label="Nombre"
               placeholder="Tu nombre"
+              iconLeft={<User size={18} className="text-[#9CA3AF]" />}
+              required
+            />
+            <Input
+              label="Apellido 1"
+              placeholder="Primer apellido"
+              iconLeft={<User size={18} className="text-[#9CA3AF]" />}
+              required
+            />
+            <Input
+              label="Apellido 2"
+              placeholder="Segundo apellido (opcional)"
               iconLeft={<User size={18} className="text-[#9CA3AF]" />}
             />
             <Input
@@ -55,12 +67,14 @@ export function Register() {
               type="email"
               placeholder="tu@email.com"
               iconLeft={<Mail size={18} className="text-[#9CA3AF]" />}
+              required
             />
             <Input
-              label="Teléfono (opcional)"
+              label="Teléfono"
               type="tel"
               placeholder="+34 612 345 678"
               iconLeft={<Phone size={18} className="text-[#9CA3AF]" />}
+              required
             />
             <Input
               label="Contraseña"
@@ -72,6 +86,7 @@ export function Register() {
                   {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               }
+              required
             />
 
             <Button 
