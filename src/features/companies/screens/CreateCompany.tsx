@@ -1,34 +1,15 @@
-import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Image, MapPin, Phone, Clock } from "lucide-react";
 import { TopBar } from "../../../shared/components/navigation/TopBar";
 import { Input } from "../../../shared/components/ui/Input";
 import { Button } from "../../../shared/components/ui/Button";
+import { useCreateCompanyForm } from "../hooks/useCreateCompanyForm";
 
 const CATEGORIES = ["Spa & Bienestar", "Barbería", "Peluquería", "Yoga & Fitness", "Dental", "Médico", "Estética", "Masajes", "Otro"];
 
 export function CreateCompany() {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState<"info" | "hours" | "done">("info");
-  const [form, setForm] = useState({
-    name: "",
-    category: "",
-    address: "",
-    phone: "",
-    description: "",
-  });
-
-  const set = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setForm(prev => ({ ...prev, [key]: e.target.value }));
-  };
-
-  const handleSubmit = async () => {
-    setLoading(true);
-    await new Promise(r => setTimeout(r, 1400));
-    setLoading(false);
-    setStep("done");
-  };
+  const { step, setStep, form, set, loading, handleSubmit, isInfoComplete } = useCreateCompanyForm();
 
   if (step === "done") {
     return (
@@ -122,7 +103,7 @@ export function CreateCompany() {
             <Button
               fullWidth
               size="lg"
-              disabled={!form.name || !form.category || !form.address}
+              disabled={!isInfoComplete}
               onClick={() => setStep("hours")}
             >
               Continuar
