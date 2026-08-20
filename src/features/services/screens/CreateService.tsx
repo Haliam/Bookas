@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { TopBar } from "../../components/navigation/TopBar";
-import { Input } from "../../components/ui/Input";
-import { Button } from "../../components/ui/Button";
+import { TopBar } from "../../../shared/components/navigation/TopBar";
+import { Input } from "../../../shared/components/ui/Input";
+import { Button } from "../../../shared/components/ui/Button";
 
 const CATEGORIES = ["Masaje", "Aromaterapia", "Meditación", "Corte", "Afeitado", "Coloración", "Yoga", "Pilates", "Pack", "Otro"];
 const DURATIONS = [15, 30, 45, 60, 75, 90, 120];

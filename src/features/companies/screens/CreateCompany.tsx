@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Image, MapPin, Phone, Clock } from "lucide-react";
-import { TopBar } from "../../components/navigation/TopBar";
-import { Input } from "../../components/ui/Input";
-import { Button } from "../../components/ui/Button";
+import { TopBar } from "../../../shared/components/navigation/TopBar";
+import { Input } from "../../../shared/components/ui/Input";
+import { Button } from "../../../shared/components/ui/Button";
 
 const CATEGORIES = ["Spa & Bienestar", "Barbería", "Peluquería", "Yoga & Fitness", "Dental", "Médico", "Estética", "Masajes", "Otro"];
 

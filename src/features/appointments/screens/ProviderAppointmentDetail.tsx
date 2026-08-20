@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Calendar, Clock, User, MessageSquare, ChevronDown } from "lucide-react";
-import { PROVIDER_APPOINTMENTS } from "../../data/mockData";
-import { StatusBadge } from "../../components/ui/Badge";
-import { TopBar } from "../../components/navigation/TopBar";
-import { Modal } from "../../components/ui/Modal";
-import { Button } from "../../components/ui/Button";
+import { PROVIDER_APPOINTMENTS } from "../../../app/data/mockData";
+import { StatusBadge } from "../../../shared/components/ui/Badge";
+import { TopBar } from "../../../shared/components/navigation/TopBar";
+import { Modal } from "../../../shared/components/ui/Modal";
+import { Button } from "../../../shared/components/ui/Button";
 
 type Status = "confirmed" | "completed" | "cancelled" | "pending";
 

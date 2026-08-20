@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router";
 import { router } from "./routes";
-import { AppProvider } from "./context/AppContext";
+import { AppProvider } from "./providers/AppContext";
 import "../styles/booka.css";
 
 export default function App() {

@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from "react-router";
 import { Plus, Clock, Edit2, Trash2, MoreVertical } from "lucide-react";
-import { COMPANIES, SERVICES } from "../../data/mockData";
-import { TopBar } from "../../components/navigation/TopBar";
-import { Button } from "../../components/ui/Button";
-import { EmptyState } from "../../components/ui/EmptyState";
+import { COMPANIES, SERVICES } from "../../../app/data/mockData";
+import { TopBar } from "../../../shared/components/navigation/TopBar";
+import { Button } from "../../../shared/components/ui/Button";
+import { EmptyState } from "../../../shared/components/ui/EmptyState";
 import { useState } from "react";
 
 export function ProviderServices() {

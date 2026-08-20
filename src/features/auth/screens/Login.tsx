@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Mail, Lock } from "lucide-react";
-import { Button } from "../../components/ui/Button";
-import { Input } from "../../components/ui/Input";
-import { useApp } from "../../context/AppContext";
+import { Button } from "../../../shared/components/ui/Button";
+import { Input } from "../../../shared/components/ui/Input";
+import { useApp } from "../../../app/providers/AppContext";
 
 export function Login() {
   const navigate = useNavigate();

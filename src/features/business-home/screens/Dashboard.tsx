@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Bell, Calendar } from "lucide-react";
-import { useApp } from "../../context/AppContext";
-import { PROVIDER_APPOINTMENTS } from "../../data/mockData";
-import { StatusBadge } from "../../components/ui/Badge";
-import { SkeletonList } from "../../components/ui/Skeleton";
+import { useApp } from "../../../app/providers/AppContext";
+import { PROVIDER_APPOINTMENTS } from "../../../app/data/mockData";
+import { StatusBadge } from "../../../shared/components/ui/Badge";
+import { SkeletonList } from "../../../shared/components/ui/Skeleton";
 
 export function ProviderDashboard() {
   const navigate = useNavigate();

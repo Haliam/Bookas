@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Clock, Plus, X } from "lucide-react";
-import { TopBar } from "../../components/navigation/TopBar";
-import { Button } from "../../components/ui/Button";
+import { TopBar } from "../../../shared/components/navigation/TopBar";
+import { Button } from "../../../shared/components/ui/Button";
 
 interface DaySchedule {
   day: string;

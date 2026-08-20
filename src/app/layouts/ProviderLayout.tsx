@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import { BottomNav } from "../components/navigation/BottomNav";
+import { BottomNav } from "../../shared/components/navigation/BottomNav";
 
 export function ProviderLayout() {
   return (

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Mail, Lock, User, Phone, Eye, EyeOff } from "lucide-react";
-import { Button } from "../../components/ui/Button";
-import { Input } from "../../components/ui/Input";
-import { useApp } from "../../context/AppContext";
+import { Button } from "../../../shared/components/ui/Button";
+import { Input } from "../../../shared/components/ui/Input";
+import { useApp } from "../../../app/providers/AppContext";
 
 export function Register() {
   const navigate = useNavigate();
@@ -27,9 +27,6 @@ export function Register() {
           <h1 className="text-[#2C2C2C] font-bold tracking-tight mb-1" style={{ fontSize: 36, letterSpacing: '0.05em' }}>
             BOOKAS
           </h1>
-          <p className="text-[#9CA3AF] text-xs tracking-[0.3em] uppercase mb-6">
-            Book-Smart
-          </p>
         </div>
 
         {/* Title */}

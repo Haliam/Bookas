@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { ChevronLeft, ChevronRight, Settings, Plus, Clock, X } from "lucide-react";
-import { TopBar } from "../../components/navigation/TopBar";
-import { Button } from "../../components/ui/Button";
-import { PROVIDER_APPOINTMENTS } from "../../data/mockData";
+import { TopBar } from "../../../shared/components/navigation/TopBar";
+import { Button } from "../../../shared/components/ui/Button";
+import { PROVIDER_APPOINTMENTS } from "../../../app/data/mockData";
 
 type ViewMode = "month" | "week";
 

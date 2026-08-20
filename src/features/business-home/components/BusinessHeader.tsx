@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { useApp } from "../../context/AppContext";
+import { useApp } from "../../../app/providers/AppContext";
 
 function getGreeting(): string {
   const hour = new Date().getHours();

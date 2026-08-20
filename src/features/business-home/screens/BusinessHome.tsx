@@ -1,9 +1,9 @@
-import { COMPANIES, PROVIDER_APPOINTMENTS, PROVIDER_STATS } from "../../data/mockData";
-import { BusinessHeader } from "../../components/business-home/BusinessHeader";
-import { TodaySummary } from "../../components/business-home/TodaySummary";
-import { PendingActions } from "../../components/business-home/PendingActions";
-import { BusinessNavigation } from "../../components/business-home/BusinessNavigation";
-import { WeeklySummary } from "../../components/business-home/WeeklySummary";
+import { COMPANIES, PROVIDER_APPOINTMENTS, PROVIDER_STATS } from "../../../app/data/mockData";
+import { BusinessHeader } from "../components/BusinessHeader";
+import { TodaySummary } from "../components/TodaySummary";
+import { PendingActions } from "../components/PendingActions";
+import { BusinessNavigation } from "../components/BusinessNavigation";
+import { WeeklySummary } from "../components/WeeklySummary";
 
 // Mock: provider's primary business, consistent with ProviderCompanies (first company)
 const PRIMARY_BUSINESS = COMPANIES[0];

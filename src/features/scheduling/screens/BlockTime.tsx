@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Calendar as CalendarIcon, Clock, AlertCircle } from "lucide-react";
-import { TopBar } from "../../components/navigation/TopBar";
-import { Button } from "../../components/ui/Button";
-import { Input } from "../../components/ui/Input";
+import { TopBar } from "../../../shared/components/navigation/TopBar";
+import { Button } from "../../../shared/components/ui/Button";
+import { Input } from "../../../shared/components/ui/Input";
 
 type BlockType = "single" | "recurring";
 

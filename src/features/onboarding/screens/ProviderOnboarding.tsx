@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { Button } from "../../components/ui/Button";
+import { Button } from "../../../shared/components/ui/Button";
 
 const SLIDES = [
   {

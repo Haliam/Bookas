@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Calendar, X, MessageCircle, Star, AlertCircle, CheckCircle } from "lucide-react";
-import { TopBar } from "../../components/navigation/TopBar";
+import { TopBar } from "../../../shared/components/navigation/TopBar";
 
 interface Notification {
   id: string;

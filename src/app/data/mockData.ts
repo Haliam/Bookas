@@ -1,44 +1,11 @@
-export interface Company {
-  id: string;
-  name: string;
-  category: string;
-  rating: number;
-  reviewCount: number;
-  address: string;
-  distance: string;
-  image: string;
-  description: string;
-  phone: string;
-  hours: string;
-  verified: boolean;
-  featured?: boolean;
-}
+// Domain types now live in ./model/*.types.ts; re-exported here for backwards compatibility.
+export type { Company } from "./model/company.types";
+export type { Service } from "./model/service.types";
+export type { Appointment } from "./model/appointment.types";
 
-export interface Service {
-  id: string;
-  companyId: string;
-  name: string;
-  duration: number; // minutes
-  price: number;
-  description: string;
-  category: string;
-}
-
-export interface Appointment {
-  id: string;
-  companyId: string;
-  companyName: string;
-  companyImage: string;
-  serviceId: string;
-  serviceName: string;
-  date: string;
-  time: string;
-  duration: number;
-  price: number;
-  status: "confirmed" | "completed" | "cancelled" | "pending";
-  notes?: string;
-  providerName: string;
-}
+import type { Company } from "./model/company.types";
+import type { Service } from "./model/service.types";
+import type { Appointment } from "./model/appointment.types";
 
 export const COMPANIES: Company[] = [
   {

@@ -1,6 +1,6 @@
-import { TopBar } from "../../components/navigation/TopBar";
+import { TopBar } from "../../../shared/components/navigation/TopBar";
 import { TrendingUp, Users, Star, Calendar } from "lucide-react";
-import { PROVIDER_STATS } from "../../data/mockData";
+import { PROVIDER_STATS } from "../../../app/data/mockData";
 
 export function ProviderReports() {
   return (

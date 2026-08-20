@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router";
 import { Clock } from "lucide-react";
-import { PROVIDER_APPOINTMENTS } from "../../data/mockData";
-import { StatusBadge } from "../../components/ui/Badge";
-import { EmptyState } from "../../components/ui/EmptyState";
-import { TopBar } from "../../components/navigation/TopBar";
+import { PROVIDER_APPOINTMENTS } from "../../../app/data/mockData";
+import { StatusBadge } from "../../../shared/components/ui/Badge";
+import { EmptyState } from "../../../shared/components/ui/EmptyState";
+import { TopBar } from "../../../shared/components/navigation/TopBar";
 
 type FilterTab = "confirmed" | "pending" | "cancelled";
 

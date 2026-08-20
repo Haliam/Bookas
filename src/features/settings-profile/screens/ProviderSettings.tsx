@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { TopBar } from "../../components/navigation/TopBar";
-import { useApp } from "../../context/AppContext";
-import { Button } from "../../components/ui/Button";
+import { TopBar } from "../../../shared/components/navigation/TopBar";
+import { useApp } from "../../../app/providers/AppContext";
+import { Button } from "../../../shared/components/ui/Button";
 import { useNavigate } from "react-router";
 
 export function ProviderSettings() {

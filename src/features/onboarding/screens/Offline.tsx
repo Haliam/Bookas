@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Wifi, RefreshCw } from "lucide-react";
-import { Button } from "../../components/ui/Button";
+import { Button } from "../../../shared/components/ui/Button";
 import { motion } from "motion/react";
 
 export function Offline() {

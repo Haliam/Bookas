@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router";
 import { Plus, ChevronRight, Star, Settings } from "lucide-react";
-import { COMPANIES } from "../../data/mockData";
-import { Button } from "../../components/ui/Button";
-import { EmptyState } from "../../components/ui/EmptyState";
-import { TopBar } from "../../components/navigation/TopBar";
+import { COMPANIES } from "../../../app/data/mockData";
+import { Button } from "../../../shared/components/ui/Button";
+import { EmptyState } from "../../../shared/components/ui/EmptyState";
+import { TopBar } from "../../../shared/components/navigation/TopBar";
 
 // Mock: provider owns first 2 companies
 const MY_COMPANIES = COMPANIES.slice(0, 2);

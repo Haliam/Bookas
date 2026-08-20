@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { Button } from "../../components/ui/Button";
+import { Button } from "../../../shared/components/ui/Button";
 
 export function Landing() {
   const navigate = useNavigate();
@@ -17,12 +17,6 @@ export function Landing() {
             Book-Smart
           </p>
         </div>
-
-        {/* Tagline */}
-        <p className="text-[#4B5563] text-lg mb-12 leading-relaxed">
-          Tu plataforma de gestión<br />
-          de citas profesionales
-        </p>
 
         {/* CTA Buttons */}
         <div className="space-y-3 mb-8">

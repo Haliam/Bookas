@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { Settings, ChevronRight, Star, TrendingUp, Users, LogOut, Building2, Bell, Shield, Calendar } from "lucide-react";
-import { useApp } from "../../context/AppContext";
-import { PROVIDER_STATS } from "../../data/mockData";
+import { useApp } from "../../../app/providers/AppContext";
+import { PROVIDER_STATS } from "../../../app/data/mockData";
 
 export function ProviderProfile() {
   const navigate = useNavigate();

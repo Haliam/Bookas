@@ -3,33 +3,34 @@ import { createBrowserRouter } from "react-router";
 // Layouts
 import { ProviderLayout } from "./layouts/ProviderLayout";
 
-// Public
-import { Landing } from "./screens/public/Landing";
-import { Login } from "./screens/public/Login";
-import { Register } from "./screens/public/Register";
-import { ForgotPassword } from "./screens/public/ForgotPassword";
+// Auth / public
+import { Landing } from "../features/landing/screens/Landing";
+import { Login } from "../features/auth/screens/Login";
+import { Register } from "../features/auth/screens/Register";
+import { ForgotPassword } from "../features/auth/screens/ForgotPassword";
 
-// Extra
-import { Onboarding } from "./screens/extra/Onboarding";
-import { RoleSwitchLanding } from "./screens/extra/RoleSwitchLanding";
-import { Offline } from "./screens/extra/Offline";
+// Onboarding
+import { Onboarding } from "../features/onboarding/screens/Onboarding";
+import { RoleSwitchLanding } from "../features/auth/screens/RoleSwitchLanding";
+import { Offline } from "../features/onboarding/screens/Offline";
 
-// Provider
-import { BusinessHome } from "./screens/provider/BusinessHome";
-import { ProviderCompanies } from "./screens/provider/Companies";
-import { CreateCompany } from "./screens/provider/CreateCompany";
-import { ProviderServices } from "./screens/provider/Services";
-import { CreateService } from "./screens/provider/CreateService";
-import { ProviderAppointments } from "./screens/provider/ProviderAppointments";
-import { ProviderAppointmentDetail } from "./screens/provider/ProviderAppointmentDetail";
-import { ProviderProfile } from "./screens/provider/ProviderProfile";
-import { ProviderSettings } from "./screens/provider/ProviderSettings";
-import { ProviderReports } from "./screens/provider/Reports";
-import { ProviderCalendar } from "./screens/provider/Calendar";
-import { ProviderHours } from "./screens/provider/Hours";
-import { BlockTime } from "./screens/provider/BlockTime";
-import { ProviderNotifications } from "./screens/provider/Notifications";
-import { ProviderOnboarding } from "./screens/provider/ProviderOnboarding";
+// Provider features
+import { BusinessHome } from "../features/business-home/screens/BusinessHome";
+import { ProviderCompanies } from "../features/companies/screens/Companies";
+import { CreateCompany } from "../features/companies/screens/CreateCompany";
+import { ProviderServices } from "../features/services/screens/Services";
+import { CreateService } from "../features/services/screens/CreateService";
+import { ProviderAppointments } from "../features/appointments/screens/ProviderAppointments";
+import { ProviderAppointmentDetail } from "../features/appointments/screens/ProviderAppointmentDetail";
+import { ProviderProfile } from "../features/settings-profile/screens/ProviderProfile";
+import { ProviderSettings } from "../features/settings-profile/screens/ProviderSettings";
+import { ProviderReports } from "../features/reports/screens/Reports";
+import { ProviderCalendar } from "../features/scheduling/screens/Calendar";
+import { ProviderHours } from "../features/scheduling/screens/Hours";
+import { BlockTime } from "../features/scheduling/screens/BlockTime";
+import { ProviderNotifications } from "../features/notifications/screens/Notifications";
+import { ProviderOnboarding } from "../features/onboarding/screens/ProviderOnboarding";
+
 
 export const router = createBrowserRouter([
   // Public

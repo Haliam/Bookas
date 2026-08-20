@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
-import { useApp } from "../../context/AppContext";
-import { Button } from "../../components/ui/Button";
+import { useApp } from "../../../app/providers/AppContext";
+import { Button } from "../../../shared/components/ui/Button";
 import { ArrowRight } from "lucide-react";
 
 export function RoleSwitchLanding() {
