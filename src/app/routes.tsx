@@ -15,7 +15,7 @@ import { RoleSwitchLanding } from "./screens/extra/RoleSwitchLanding";
 import { Offline } from "./screens/extra/Offline";
 
 // Provider
-import { ProviderDashboard } from "./screens/provider/Dashboard";
+import { BusinessHome } from "./screens/provider/BusinessHome";
 import { ProviderCompanies } from "./screens/provider/Companies";
 import { CreateCompany } from "./screens/provider/CreateCompany";
 import { ProviderServices } from "./screens/provider/Services";
@@ -49,12 +49,13 @@ export const router = createBrowserRouter([
     path: "/provider",
     Component: ProviderLayout,
     children: [
-      { index: true, Component: ProviderDashboard },
+      { index: true, Component: BusinessHome },
       { path: "companies", Component: ProviderCompanies },
       { path: "companies/create", Component: CreateCompany },
       { path: "companies/:id/services", Component: ProviderServices },
       { path: "companies/:id/services/create", Component: CreateService },
       { path: "companies/:id/edit", Component: CreateCompany },
+      { path: "clients", Component: ProviderCompanies }, // placeholder until a dedicated clients screen exists
       { path: "appointments", Component: ProviderAppointments },
       { path: "appointments/:id", Component: ProviderAppointmentDetail },
       { path: "calendar", Component: ProviderCalendar },
