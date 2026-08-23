@@ -1,44 +1,11 @@
-export interface Company {
-  id: string;
-  name: string;
-  category: string;
-  rating: number;
-  reviewCount: number;
-  address: string;
-  distance: string;
-  image: string;
-  description: string;
-  phone: string;
-  hours: string;
-  verified: boolean;
-  featured?: boolean;
-}
+// Domain types now live in ./model/*.types.ts; re-exported here for backwards compatibility.
+export type { Company } from "./model/company.types";
+export type { Service } from "./model/service.types";
+export type { Appointment } from "./model/appointment.types";
 
-export interface Service {
-  id: string;
-  companyId: string;
-  name: string;
-  duration: number; // minutes
-  price: number;
-  description: string;
-  category: string;
-}
-
-export interface Appointment {
-  id: string;
-  companyId: string;
-  companyName: string;
-  companyImage: string;
-  serviceId: string;
-  serviceName: string;
-  date: string;
-  time: string;
-  duration: number;
-  price: number;
-  status: "confirmed" | "completed" | "cancelled" | "pending";
-  notes?: string;
-  providerName: string;
-}
+import type { Company } from "./model/company.types";
+import type { Service } from "./model/service.types";
+import type { Appointment } from "./model/appointment.types";
 
 export const COMPANIES: Company[] = [
   {
@@ -238,60 +205,157 @@ export const PROVIDER_STATS = {
 };
 
 export const PROVIDER_APPOINTMENTS: Appointment[] = [
+  // ── Confirmadas (10) ─────────────────────────────────────────
   {
-    id: "pa1",
-    companyId: "c1",
-    companyName: "Zen Wellness Studio",
+    id: "pa1", companyId: "c1", companyName: "Zen Wellness Studio",
     companyImage: "https://images.unsplash.com/photo-1763978485095-1cd13f4d3cb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx6ZW4lMjBzcGElMjB3ZWxsbmVzcyUyMG1pbmltYWwlMjBpbnRlcmlvcnxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
-    serviceId: "s1",
-    serviceName: "Masaje Relajante 60min",
-    date: "2026-03-01",
-    time: "09:00",
-    duration: 60,
-    price: 65,
-    status: "confirmed",
-    providerName: "Laura Méndez",
+    serviceId: "s1", serviceName: "Masaje Relajante 60min",
+    date: "2026-04-06", time: "09:00", duration: 60, price: 65, status: "confirmed", providerName: "Laura Méndez",
   },
   {
-    id: "pa2",
-    companyId: "c1",
-    companyName: "Zen Wellness Studio",
-    companyImage: "https://images.unsplash.com/photo-1763978485095-1cd13f4d3cb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx6ZW4lMjBzcGElMjB3ZWxsbmVzcyUyMG1pbmltYWwlMjBpbnRlcmlvcnxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
-    serviceId: "s2",
-    serviceName: "Aromaterapia Premium",
-    date: "2026-03-01",
-    time: "11:00",
-    duration: 90,
-    price: 90,
-    status: "pending",
-    providerName: "Laura Méndez",
+    id: "pa2", companyId: "c2", companyName: "Barber & Co.",
+    companyImage: "https://images.unsplash.com/photo-1622629217819-892db897f01a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYXJiZXIlMjBzaG9wJTIwbW9kZXJuJTIwbWluaW1hbHxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s7", serviceName: "Corte + Barba",
+    date: "2026-04-06", time: "10:30", duration: 60, price: 50, status: "confirmed", providerName: "Carlos Ruiz",
   },
   {
-    id: "pa3",
-    companyId: "c1",
-    companyName: "Zen Wellness Studio",
+    id: "pa3", companyId: "c1", companyName: "Zen Wellness Studio",
     companyImage: "https://images.unsplash.com/photo-1763978485095-1cd13f4d3cb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx6ZW4lMjBzcGElMjB3ZWxsbmVzcyUyMG1pbmltYWwlMjBpbnRlcmlvcnxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
-    serviceId: "s3",
-    serviceName: "Meditación Guiada",
-    date: "2026-03-01",
-    time: "14:00",
-    duration: 45,
-    price: 35,
-    status: "confirmed",
-    providerName: "Laura Méndez",
+    serviceId: "s2", serviceName: "Aromaterapia Premium",
+    date: "2026-04-06", time: "12:00", duration: 90, price: 90, status: "confirmed", providerName: "Laura Méndez",
   },
   {
-    id: "pa4",
-    companyId: "c1",
-    companyName: "Zen Wellness Studio",
+    id: "pa4", companyId: "c3", companyName: "Flow Yoga Studio",
+    companyImage: "https://images.unsplash.com/photo-1636632202905-e740e830189e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b2dhJTIwc3R1ZGlvJTIwY2FsbSUyMG9jZWFuJTIwbGlnaHR8ZW58MXx8fHwxNzcyMzI0MDg0fDA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s8", serviceName: "Clase de Yoga Individual",
+    date: "2026-04-06", time: "14:00", duration: 60, price: 40, status: "confirmed", providerName: "Ana Torres",
+  },
+  {
+    id: "pa4b", companyId: "c2", companyName: "Barber & Co.",
+    companyImage: "https://images.unsplash.com/photo-1622629217819-892db897f01a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYXJiZXIlMjBzaG9wJTIwbW9kZXJuJTIwbWluaW1hbHxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s6", serviceName: "Afeitado Tradicional",
+    date: "2026-04-06", time: "15:30", duration: 45, price: 35, status: "confirmed", providerName: "Carlos Ruiz",
+  },
+  {
+    id: "pa4c", companyId: "c5", companyName: "Sonrisa Dental",
+    companyImage: "https://images.unsplash.com/photo-1762625570087-6d98fca29531?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxkZW50YWwlMjBjbGluaWMlMjBjbGVhbiUyMG1vZGVybnxlbnwxfHx8fDE3NzIzMjQwODV8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s14", serviceName: "Revisión y Limpieza",
+    date: "2026-04-06", time: "17:30", duration: 45, price: 55, status: "confirmed", providerName: "Dr. Pablo García",
+  },
+  {
+    id: "pa5", companyId: "c5", companyName: "Sonrisa Dental",
+    companyImage: "https://images.unsplash.com/photo-1762625570087-6d98fca29531?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZW50YWwlMjBjbGluaWMlMjBjbGVhbiUyMG1vZGVybnxlbnwxfHx8fDE3NzIzMjQwODV8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s14", serviceName: "Revisión y Limpieza",
+    date: "2026-04-07", time: "09:30", duration: 45, price: 55, status: "confirmed", providerName: "Dr. Pablo García",
+  },
+  {
+    id: "pa6", companyId: "c4", companyName: "Lumière Beauty",
+    companyImage: "https://images.unsplash.com/photo-1600948836101-f9ffda59d250?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWF1dHklMjBzYWxvbiUyMG1pbmltYWwlMjBtb2Rlcm58ZW58MXx8fHwxNzcyMzI0MDg0fDA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s11", serviceName: "Corte & Peinado",
+    date: "2026-04-07", time: "11:00", duration: 60, price: 45, status: "confirmed", providerName: "María López",
+  },
+  {
+    id: "pa7", companyId: "c1", companyName: "Zen Wellness Studio",
     companyImage: "https://images.unsplash.com/photo-1763978485095-1cd13f4d3cb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx6ZW4lMjBzcGElMjB3ZWxsbmVzcyUyMG1pbmltYWwlMjBpbnRlcmlvcnxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
-    serviceId: "s1",
-    serviceName: "Masaje Relajante 60min",
-    date: "2026-02-28",
-    time: "10:00",
-    duration: 60,
-    price: 65,
-    status: "completed",
-    providerName: "Laura Méndez",
+    serviceId: "s3", serviceName: "Meditación Guiada",
+    date: "2026-04-07", time: "17:00", duration: 45, price: 35, status: "confirmed", providerName: "Laura Méndez",
+  },
+  {
+    id: "pa8", companyId: "c2", companyName: "Barber & Co.",
+    companyImage: "https://images.unsplash.com/photo-1622629217819-892db897f01a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYXJiZXIlMjBzaG9wJTIwbW9kZXJuJTIwbWluaW1hbHxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s5", serviceName: "Corte Clásico",
+    date: "2026-04-08", time: "09:00", duration: 30, price: 25, status: "confirmed", providerName: "Carlos Ruiz",
+  },
+  {
+    id: "pa9", companyId: "c3", companyName: "Flow Yoga Studio",
+    companyImage: "https://images.unsplash.com/photo-1636632202905-e740e830189e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b2dhJTIwc3R1ZGlvJTIwY2FsbSUyMG9jZWFuJTIwbGlnaHR8ZW58MXx8fHwxNzcyMzI0MDg0fDA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s9", serviceName: "Vinyasa Flow",
+    date: "2026-04-08", time: "11:30", duration: 75, price: 20, status: "confirmed", providerName: "Ana Torres",
+  },
+  {
+    id: "pa10", companyId: "c5", companyName: "Sonrisa Dental",
+    companyImage: "https://images.unsplash.com/photo-1762625570087-6d98fca29531?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxkZW50YWwlMjBjbGluaWMlMjBjbGVhbiUyMG1vZGVybnxlbnwxfHx8fDE3NzIzMjQwODV8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s15", serviceName: "Blanqueamiento LED",
+    date: "2026-04-08", time: "16:00", duration: 60, price: 180, status: "confirmed", providerName: "Dr. Pablo García",
+  },
+  // ── Pendientes (6) ───────────────────────────────────────────
+  {
+    id: "pb1", companyId: "c4", companyName: "Lumière Beauty",
+    companyImage: "https://images.unsplash.com/photo-1600948836101-f9ffda59d250?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWF1dHklMjBzYWxvbiUyMG1pbmltYWwlMjBtb2Rlcm58ZW58MXx8fHwxNzcyMzI0MDg0fDA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s12", serviceName: "Coloración Completa",
+    date: "2026-04-06", time: "09:00", duration: 120, price: 95, status: "pending", providerName: "María López",
+  },
+  {
+    id: "pb2", companyId: "c1", companyName: "Zen Wellness Studio",
+    companyImage: "https://images.unsplash.com/photo-1763978485095-1cd13f4d3cb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx6ZW4lMjBzcGElMjB3ZWxsbmVzcyUyMG1pbmltYWwlMjBpbnRlcmlvcnxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s4", serviceName: "Ritual Zen Completo",
+    date: "2026-04-06", time: "14:00", duration: 120, price: 130, status: "pending", providerName: "Laura Méndez",
+  },
+  {
+    id: "pb3", companyId: "c2", companyName: "Barber & Co.",
+    companyImage: "https://images.unsplash.com/photo-1622629217819-892db897f01a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYXJiZXIlMjBzaG9wJTIwbW9kZXJuJTIwbWluaW1hbHxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s6", serviceName: "Afeitado Tradicional",
+    date: "2026-04-07", time: "10:00", duration: 45, price: 35, status: "pending", providerName: "Carlos Ruiz",
+  },
+  {
+    id: "pb4", companyId: "c3", companyName: "Flow Yoga Studio",
+    companyImage: "https://images.unsplash.com/photo-1636632202905-e740e830189e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b2dhJTIwc3R1ZGlvJTIwY2FsbSUyMG9jZWFuJTIwbGlnaHR8ZW58MXx8fHwxNzcyMzI0MDg0fDA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s10", serviceName: "Meditación & Mindfulness",
+    date: "2026-04-07", time: "18:00", duration: 45, price: 15, status: "pending", providerName: "Ana Torres",
+  },
+  {
+    id: "pb5", companyId: "c5", companyName: "Sonrisa Dental",
+    companyImage: "https://images.unsplash.com/photo-1762625570087-6d98fca29531?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxkZW50YWwlMjBjbGluaWMlMjBjbGVhbiUyMG1vZGVybnxlbnwxfHx8fDE3NzIzMjQwODV8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s14", serviceName: "Revisión y Limpieza",
+    date: "2026-04-08", time: "09:00", duration: 45, price: 55, status: "pending", providerName: "Dr. Pablo García",
+  },
+  {
+    id: "pb6", companyId: "c4", companyName: "Lumière Beauty",
+    companyImage: "https://images.unsplash.com/photo-1600948836101-f9ffda59d250?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWF1dHklMjBzYWxvbiUyMG1pbmltYWwlMjBtb2Rlcm58ZW58MXx8fHwxNzcyMzI0MDg0fDA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s13", serviceName: "Balayage & Highlights",
+    date: "2026-04-08", time: "15:00", duration: 150, price: 130, status: "pending", providerName: "María López",
+  },
+  // ── Canceladas (7) ───────────────────────────────────────────
+  {
+    id: "pc1", companyId: "c1", companyName: "Zen Wellness Studio",
+    companyImage: "https://images.unsplash.com/photo-1763978485095-1cd13f4d3cb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx6ZW4lMjBzcGElMjB3ZWxsbmVzcyUyMG1pbmltYWwlMjBpbnRlcmlvcnxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s1", serviceName: "Masaje Relajante 60min",
+    date: "2026-04-06", time: "11:00", duration: 60, price: 65, status: "cancelled", providerName: "Laura Méndez",
+  },
+  {
+    id: "pc2", companyId: "c2", companyName: "Barber & Co.",
+    companyImage: "https://images.unsplash.com/photo-1622629217819-892db897f01a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYXJiZXIlMjBzaG9wJTIwbW9kZXJuJTIwbWluaW1hbHxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s5", serviceName: "Corte Clásico",
+    date: "2026-04-06", time: "13:00", duration: 30, price: 25, status: "cancelled", providerName: "Carlos Ruiz",
+  },
+  {
+    id: "pc3", companyId: "c3", companyName: "Flow Yoga Studio",
+    companyImage: "https://images.unsplash.com/photo-1636632202905-e740e830189e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b2dhJTIwc3R1ZGlvJTIwY2FsbSUyMG9jZWFuJTIwbGlnaHR8ZW58MXx8fHwxNzcyMzI0MDg0fDA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s8", serviceName: "Clase de Yoga Individual",
+    date: "2026-04-07", time: "09:00", duration: 60, price: 40, status: "cancelled", providerName: "Ana Torres",
+  },
+  {
+    id: "pc4", companyId: "c5", companyName: "Sonrisa Dental",
+    companyImage: "https://images.unsplash.com/photo-1762625570087-6d98fca29531?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxkZW50YWwlMjBjbGluaWMlMjBjbGVhbiUyMG1vZGVybnxlbnwxfHx8fDE3NzIzMjQwODV8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s15", serviceName: "Blanqueamiento LED",
+    date: "2026-04-07", time: "12:00", duration: 60, price: 180, status: "cancelled", providerName: "Dr. Pablo García",
+  },
+  {
+    id: "pc5", companyId: "c4", companyName: "Lumière Beauty",
+    companyImage: "https://images.unsplash.com/photo-1600948836101-f9ffda59d250?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWF1dHklMjBzYWxvbiUyMG1pbmltYWwlMjBtb2Rlcm58ZW58MXx8fHwxNzcyMzI0MDg0fDA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s12", serviceName: "Coloración Completa",
+    date: "2026-04-07", time: "16:00", duration: 120, price: 95, status: "cancelled", providerName: "María López",
+  },
+  {
+    id: "pc6", companyId: "c1", companyName: "Zen Wellness Studio",
+    companyImage: "https://images.unsplash.com/photo-1763978485095-1cd13f4d3cb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx6ZW4lMjBzcGElMjB3ZWxsbmVzcyUyMG1pbmltYWwlMjBpbnRlcmlvcnxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s2", serviceName: "Aromaterapia Premium",
+    date: "2026-04-08", time: "10:00", duration: 90, price: 90, status: "cancelled", providerName: "Laura Méndez",
+  },
+  {
+    id: "pc7", companyId: "c2", companyName: "Barber & Co.",
+    companyImage: "https://images.unsplash.com/photo-1622629217819-892db897f01a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYXJiZXIlMjBzaG9wJTIwbW9kZXJuJTIwbWluaW1hbHxlbnwxfHx8fDE3NzIzMjQwODN8MA&ixlib=rb-4.1.0&q=80&w=400",
+    serviceId: "s7", serviceName: "Corte + Barba",
+    date: "2026-04-08", time: "17:30", duration: 60, price: 50, status: "cancelled", providerName: "Carlos Ruiz",
   },
 ];
