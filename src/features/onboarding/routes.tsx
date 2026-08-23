@@ -6,6 +6,6 @@ const ProviderOnboarding = lazy(() => import("./screens/ProviderOnboarding").the
 
 export const onboardingRoutes: RouteObject[] = [
   { path: "/onboarding", Component: Onboarding },
-  { path: "/onboarding-provider", Component: ProviderOnboarding },
+  { path: "/provider/onboarding", Component: ProviderOnboarding },
   { path: "/offline", Component: Offline },
 ];

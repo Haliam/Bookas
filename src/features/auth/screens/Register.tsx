@@ -16,7 +16,7 @@ export function Register() {
     await new Promise(r => setTimeout(r, 1400));
     setLoading(false);
     setIsLoggedIn(true);
-    navigate("/onboarding-provider");
+    navigate("/provider/onboarding");
   };
 
   return (

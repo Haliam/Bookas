@@ -40,9 +40,6 @@ export function Login() {
           <h1 className="text-black font-bold tracking-tight mb-1" style={{ fontSize: 36, letterSpacing: "0.05em" }}>
             BOOKAS
           </h1>
-          <p className="text-black/60 text-xs tracking-[0.3em] uppercase mb-6">
-            Book-Smart
-          </p>
         </div>
 
         {/* Title */}

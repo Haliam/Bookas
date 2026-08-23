@@ -17,13 +17,20 @@ const SLIDES = [
     color: "#1BBF8A",
     bg: "#E8FBF4",
   },
+    {
+    emoji: "💳",
+    title: "Controla y recibe tu dinero",
+    description: "Activa la pasarela de pagos para cobrar online, controlar cada movimiento y recibir tus ingresos de forma segura.",
+    color: "#2563EB",
+    bg: "#EAF2FF",
+  },
   {
     emoji: "📊",
     title: "Crece con datos reales",
     description: "Analiza tus ingresos, servicios más populares y gestiona tu negocio con información en tiempo real.",
     color: "#F5B11F",
     bg: "#FEF7E0",
-  },
+  }
 ];
 
 export function ProviderOnboarding() {
