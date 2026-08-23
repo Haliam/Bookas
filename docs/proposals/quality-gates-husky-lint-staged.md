@@ -1,9 +1,9 @@
 ---
 title: Bookas - Quality Gates with Husky and lint-staged
 description: Plan phased to establish local and CI quality checks for the frontend.
-version: 1.0.1
+version: 1.0.2
 date: 2026-08-23
-status: phase-0-complete
+status: phase-1-complete
 ---
 
 # Quality Gates with Husky and lint-staged
@@ -41,7 +41,9 @@ The repository currently has these gaps:
 | Generated output | Do not version `dist/` | Add `dist/` to `.gitignore`, remove existing generated files from Git tracking, and build them in CI/deployment. |
 | Pre-commit scope | Fast, staged-only | Run ESLint and Prettier through `lint-staged`; keep full type-check and repository-wide checks outside the hook. |
 
-Phase 0 is complete: `package.json` pins `pnpm@10.34.5` through Corepack and `.gitignore` excludes new `dist/` output. Existing `dist/` files and `package-lock.json` remain tracked until Phase 1 is implemented and reviewed.
+Phase 0 is complete: `package.json` pins `pnpm@10.34.5` through Corepack and `.gitignore` excludes new `dist/` output.
+
+Phase 1 is complete: `pnpm-lock.yaml` is the repository lockfile, `package-lock.json` is no longer tracked, and existing `dist/` output is no longer tracked while remaining available locally. The dependency installation reported a pre-existing deprecation warning for `recharts@2.15.2`; it did not block installation or the build.
 
 ## Phased implementation
 
