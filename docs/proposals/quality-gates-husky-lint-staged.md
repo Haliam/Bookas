@@ -1,9 +1,9 @@
 ---
 title: Bookas - Quality Gates with Husky and lint-staged
 description: Plan phased to establish local and CI quality checks for the frontend.
-version: 1.0.5
+version: 1.0.6
 date: 2026-08-23
-status: phase-3-complete
+status: phase-5-in-progress
 ---
 
 # Quality Gates with Husky and lint-staged
@@ -35,11 +35,11 @@ The repository currently has these gaps:
 
 ## Decisions already made
 
-| Decision | Choice | Consequence |
-| --- | --- | --- |
-| Package manager | `pnpm@10.34.5` via Corepack | Add `pnpm-lock.yaml`, standardize local and CI commands, and retire `package-lock.json` after migration. |
-| Generated output | Do not version `dist/` | Add `dist/` to `.gitignore`, remove existing generated files from Git tracking, and build them in CI/deployment. |
-| Pre-commit scope | Fast, staged-only | Run ESLint and Prettier through `lint-staged`; keep full type-check and repository-wide checks outside the hook. |
+| Decision         | Choice                      | Consequence                                                                                                      |
+| ---------------- | --------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Package manager  | `pnpm@10.34.5` via Corepack | Add `pnpm-lock.yaml`, standardize local and CI commands, and retire `package-lock.json` after migration.         |
+| Generated output | Do not version `dist/`      | Add `dist/` to `.gitignore`, remove existing generated files from Git tracking, and build them in CI/deployment. |
+| Pre-commit scope | Fast, staged-only           | Run ESLint and Prettier through `lint-staged`; keep full type-check and repository-wide checks outside the hook. |
 
 Phase 0 is complete: `package.json` pins `pnpm@10.34.5` through Corepack and `.gitignore` excludes new `dist/` output.
 
@@ -48,6 +48,8 @@ Phase 1 is complete: `pnpm-lock.yaml` is the repository lockfile, `package-lock.
 Phase 2 tooling has been added to `package.json` and resolved in `pnpm-lock.yaml`. Because the repository is on an exFAT volume, `.npmrc` uses `node-linker=hoisted` to avoid unsupported symlinks. Executable verification remains pending because the current terminal session is not returning command output after installation; the first successful verification must include `pnpm install --frozen-lockfile`, tool versions, and `pnpm run build`.
 
 Phase 3 is complete: `tsconfig.json`, `eslint.config.js`, `.prettierrc`, and `.prettierignore` are configured; TypeScript is pinned to the `5.9.x` line for compatibility with `typescript-eslint@8.67.0`; and the quality scripts are present in `package.json`. `type-check`, `lint`, `format:check`, and `build` all pass. The build recreates local `dist/` output, which remains ignored and untracked.
+
+Phase 4 and the configuration portion of Phase 5 are implemented: `prepare` runs Husky initialization, `.husky/pre-commit` invokes `corepack pnpm exec lint-staged` for Git Bash compatibility on Windows, and staged-file mappings for TypeScript, CSS, SCSS, Markdown, JSON, YAML, and related files are present in `package.json`. Frozen installation and direct lint-staged execution pass; a real staged commit test remains pending.
 
 ## Phased implementation
 
@@ -170,7 +172,7 @@ Tasks:
 4. Keep `.husky/pre-commit` limited to the single orchestration command:
 
 ```sh
-pnpm exec lint-staged
+corepack pnpm exec lint-staged
 ```
 
 5. Remove the temporary commented-out hook once lint-staged has a valid configuration.
@@ -193,13 +195,8 @@ Recommended initial mapping:
 ```json
 {
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{css,scss,md,json,jsonc,yaml,yml}": [
-      "prettier --write"
-    ]
+    "*.{ts,tsx}": ["eslint --fix", "prettier --write"],
+    "*.{css,scss,md,json,jsonc,yaml,yml}": ["prettier --write"]
   }
 }
 ```
@@ -307,13 +304,13 @@ Exit criteria:
 
 ## Risks and mitigations
 
-| Risk | Mitigation |
-| --- | --- |
-| Existing source produces many lint errors | Start with recommended pragmatic rules, baseline violations deliberately, and tighten incrementally. |
-| Pre-commit becomes slow | Restrict it to staged files; keep type-check, build, and full lint in CI. |
-| Husky version changes hook behavior | Pin the dependency through the lockfile and validate the generated hook structure after upgrades. |
-| `dist/` removal affects deployment | Confirm deployment builds from source before removing tracked artifacts. |
-| Team uses mixed package managers | Add `packageManager`, standardize scripts, and maintain only `pnpm-lock.yaml`. |
+| Risk                                           | Mitigation                                                                                                    |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Existing source produces many lint errors      | Start with recommended pragmatic rules, baseline violations deliberately, and tighten incrementally.          |
+| Pre-commit becomes slow                        | Restrict it to staged files; keep type-check, build, and full lint in CI.                                     |
+| Husky version changes hook behavior            | Pin the dependency through the lockfile and validate the generated hook structure after upgrades.             |
+| `dist/` removal affects deployment             | Confirm deployment builds from source before removing tracked artifacts.                                      |
+| Team uses mixed package managers               | Add `packageManager`, standardize scripts, and maintain only `pnpm-lock.yaml`.                                |
 | Windows file locks interrupt branch operations | Close active dev servers during branch changes and avoid generating build output inside tracked source paths. |
 
 ## Definition of done
@@ -321,7 +318,7 @@ Exit criteria:
 This proposal is implemented when:
 
 1. A clean `pnpm install --frozen-lockfile` initializes Husky.
-2. `pnpm exec lint-staged` has a valid, versioned configuration.
+2. `corepack pnpm exec lint-staged` has a valid, versioned configuration.
 3. `pre-commit` processes only staged files and blocks unfixable issues.
 4. `pnpm lint`, `pnpm run format:check`, `pnpm type-check`, and `pnpm build` pass locally.
 5. CI runs the same full checks for pull requests.

@@ -1,2 +1,1 @@
-# TODO: lint-staged disabled temporarily until eslint/prettier config is set up
-# npx lint-staged
+corepack pnpm exec lint-staged
