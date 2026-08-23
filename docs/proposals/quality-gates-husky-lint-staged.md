@@ -1,9 +1,9 @@
 ---
 title: Bookas - Quality Gates with Husky and lint-staged
 description: Plan phased to establish local and CI quality checks for the frontend.
-version: 1.0.3
+version: 1.0.5
 date: 2026-08-23
-status: phase-2-in-progress
+status: phase-3-complete
 ---
 
 # Quality Gates with Husky and lint-staged
@@ -46,6 +46,8 @@ Phase 0 is complete: `package.json` pins `pnpm@10.34.5` through Corepack and `.g
 Phase 1 is complete: `pnpm-lock.yaml` is the repository lockfile, `package-lock.json` is no longer tracked, and existing `dist/` output is no longer tracked while remaining available locally. The dependency installation reported a pre-existing deprecation warning for `recharts@2.15.2`; it did not block installation or the build.
 
 Phase 2 tooling has been added to `package.json` and resolved in `pnpm-lock.yaml`. Because the repository is on an exFAT volume, `.npmrc` uses `node-linker=hoisted` to avoid unsupported symlinks. Executable verification remains pending because the current terminal session is not returning command output after installation; the first successful verification must include `pnpm install --frozen-lockfile`, tool versions, and `pnpm run build`.
+
+Phase 3 is complete: `tsconfig.json`, `eslint.config.js`, `.prettierrc`, and `.prettierignore` are configured; TypeScript is pinned to the `5.9.x` line for compatibility with `typescript-eslint@8.67.0`; and the quality scripts are present in `package.json`. `type-check`, `lint`, `format:check`, and `build` all pass. The build recreates local `dist/` output, which remains ignored and untracked.
 
 ## Phased implementation
 
