@@ -1,9 +1,9 @@
 ---
 title: Bookas - Quality Gates with Husky and lint-staged
 description: Plan phased to establish local and CI quality checks for the frontend.
-version: 1.0.2
+version: 1.0.3
 date: 2026-08-23
-status: phase-1-complete
+status: phase-2-in-progress
 ---
 
 # Quality Gates with Husky and lint-staged
@@ -44,6 +44,8 @@ The repository currently has these gaps:
 Phase 0 is complete: `package.json` pins `pnpm@10.34.5` through Corepack and `.gitignore` excludes new `dist/` output.
 
 Phase 1 is complete: `pnpm-lock.yaml` is the repository lockfile, `package-lock.json` is no longer tracked, and existing `dist/` output is no longer tracked while remaining available locally. The dependency installation reported a pre-existing deprecation warning for `recharts@2.15.2`; it did not block installation or the build.
+
+Phase 2 tooling has been added to `package.json` and resolved in `pnpm-lock.yaml`. Because the repository is on an exFAT volume, `.npmrc` uses `node-linker=hoisted` to avoid unsupported symlinks. Executable verification remains pending because the current terminal session is not returning command output after installation; the first successful verification must include `pnpm install --frozen-lockfile`, tool versions, and `pnpm run build`.
 
 ## Phased implementation
 
