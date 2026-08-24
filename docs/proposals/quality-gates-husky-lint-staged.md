@@ -1,9 +1,9 @@
 ---
 title: Bookas - Quality Gates with Husky and lint-staged
 description: Plan phased to establish local and CI quality checks for the frontend.
-version: 1.0.8
+version: 1.1.0
 date: 2026-08-23
-status: phase-6-complete
+status: phase-7-pending-verification
 ---
 
 # Quality Gates with Husky and lint-staged
@@ -24,14 +24,17 @@ The goal is to prevent avoidable formatting and lint errors from entering commit
 
 ## Current baseline
 
-The repository currently has these gaps:
+The quality tooling is implemented on branch `add_husky`:
 
-- `.husky/pre-commit` exists but its `lint-staged` command is temporarily disabled.
-- `husky`, `lint-staged`, `eslint`, `prettier`, `typescript`, and their integrations are not declared in `package.json`.
-- There is no `tsconfig.json`, ESLint configuration, or Prettier configuration.
-- `package-lock.json` exists, although the selected package manager is `pnpm`.
-- `dist/` is currently present in the repository and must be removed from tracking when the migration is implemented.
-- There is no CI workflow enforcing lint, formatting, or type-checking.
+- `pnpm@10.34.5` is pinned through Corepack.
+- `.npmrc` uses `node-linker=hoisted` because the repository is stored on an exFAT volume.
+- `pnpm-lock.yaml` is the only package lockfile; `package-lock.json` is no longer tracked.
+- `dist/` is ignored and no longer tracked.
+- ESLint, Prettier, TypeScript, Husky, and lint-staged are declared and configured.
+- `.husky/pre-commit` runs `corepack pnpm exec lint-staged`.
+- `.github/workflows/quality.yml` runs the quality checks on pull requests and pushes to `main`.
+- Local `install`, `lint`, `type-check`, `format:check`, `build`, and staged lint-staged validation have passed.
+- The latest CI workflow commit is `3e23ee1` (`ci: add quality checks workflow`) and has been pushed to `origin/add_husky`.
 
 ## Decisions already made
 
@@ -45,13 +48,15 @@ Phase 0 is complete: `package.json` pins `pnpm@10.34.5` through Corepack and `.g
 
 Phase 1 is complete: `pnpm-lock.yaml` is the repository lockfile, `package-lock.json` is no longer tracked, and existing `dist/` output is no longer tracked while remaining available locally. The dependency installation reported a pre-existing deprecation warning for `recharts@2.15.2`; it did not block installation or the build.
 
-Phase 2 tooling has been added to `package.json` and resolved in `pnpm-lock.yaml`. Because the repository is on an exFAT volume, `.npmrc` uses `node-linker=hoisted` to avoid unsupported symlinks. Executable verification remains pending because the current terminal session is not returning command output after installation; the first successful verification must include `pnpm install --frozen-lockfile`, tool versions, and `pnpm run build`.
+Phase 2 is complete: tooling has been added to `package.json` and resolved in `pnpm-lock.yaml`. Because the repository is on an exFAT volume, `.npmrc` uses `node-linker=hoisted` to avoid unsupported symlinks. Frozen installation and the tool version checks pass.
 
 Phase 3 is complete: `tsconfig.json`, `eslint.config.js`, `.prettierrc`, and `.prettierignore` are configured; TypeScript is pinned to the `5.9.x` line for compatibility with `typescript-eslint@8.67.0`; and the quality scripts are present in `package.json`. `type-check`, `lint`, `format:check`, and `build` all pass. The build recreates local `dist/` output, which remains ignored and untracked.
 
-Phase 4 and the configuration portion of Phase 5 are implemented: `prepare` runs Husky initialization, `.husky/pre-commit` invokes `corepack pnpm exec lint-staged` for Git Bash compatibility on Windows, and staged-file mappings for TypeScript, CSS, SCSS, Markdown, JSON, YAML, and related files are present in `package.json`. Frozen installation and direct lint-staged execution pass; a real staged commit test remains pending.
+Phase 4 and Phase 5 are complete: `prepare` runs Husky initialization, `.husky/pre-commit` invokes `corepack pnpm exec lint-staged` for Git Bash compatibility on Windows, and staged-file mappings for TypeScript, CSS, SCSS, Markdown, JSON, YAML, and related files are present in `package.json`. A real commit containing staged changes passed the hook in commit `168de98`.
 
-Phase 6 is complete: Prettier formatted the repository, the one remaining formatting issue in `Notifications.tsx` was corrected, and `format:check`, `type-check`, `lint`, `build`, and `git diff --check` pass. ESLint reports 28 non-blocking `react-refresh/only-export-components` warnings in route/provider and shared UI modules; these are deferred because resolving them requires separating component exports from route/configuration exports.
+Phase 6 is complete: Prettier formatted the repository, the remaining formatting issue in `Notifications.tsx` was corrected, and `format:check`, `type-check`, `lint`, `build`, and `git diff --check` pass. ESLint reports 28 non-blocking `react-refresh/only-export-components` warnings in route/provider and shared UI modules; these are deferred because resolving them requires separating component exports from route/configuration exports.
+
+Phase 7 is implemented: `.github/workflows/quality.yml` runs on pull requests and pushes to `main`, installs Node.js `24.19.0` and pnpm `10.34.5`, then runs frozen installation, formatting, lint, type-check, and build. The workflow was committed and pushed; final completion requires one successful GitHub Actions run.
 
 ## Phased implementation
 
