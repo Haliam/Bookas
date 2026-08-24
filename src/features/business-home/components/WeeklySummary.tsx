@@ -1,23 +1,31 @@
-import { Link } from "react-router";
-import { ChevronRight } from "lucide-react";
+import { Link } from 'react-router'
+import { ChevronRight } from 'lucide-react'
 
 interface WeeklySummaryProps {
-  reservationsCount: number;
-  rating: number;
-  reviewCount: number;
+  reservationsCount: number
+  rating: number
+  reviewCount: number
 }
 
 // Mock: week-over-week trend until a real analytics endpoint exists
-const MOCK_WEEK_CHANGE = "+8% vs. semana anterior";
+const MOCK_WEEK_CHANGE = '+8% vs. semana anterior'
 
-export function WeeklySummary({ reservationsCount, rating, reviewCount }: WeeklySummaryProps) {
+export function WeeklySummary({
+  reservationsCount,
+  rating,
+  reviewCount,
+}: WeeklySummaryProps) {
   return (
     <section className="px-5 py-6 border-t border-[#F0F0F0]">
-      <h2 className="text-[#9CA3AF] text-xs font-medium uppercase tracking-wide mb-3">Esta semana</h2>
+      <h2 className="text-[#9CA3AF] text-xs font-medium uppercase tracking-wide mb-3">
+        Esta semana
+      </h2>
 
       <div className="flex items-center justify-between mb-1">
         <p className="text-[#2C2C2C] text-sm">{reservationsCount} reservas</p>
-        <p className="text-[#2C2C2C] text-sm">{rating.toFixed(1).replace(".", ",")} ★</p>
+        <p className="text-[#2C2C2C] text-sm">
+          {rating.toFixed(1).replace('.', ',')} ★
+        </p>
       </div>
       <div className="flex items-center justify-between mb-4">
         <p className="text-[#9CA3AF] text-xs">{MOCK_WEEK_CHANGE}</p>
@@ -32,5 +40,5 @@ export function WeeklySummary({ reservationsCount, rating, reviewCount }: Weekly
         <ChevronRight size={14} />
       </Link>
     </section>
-  );
+  )
 }

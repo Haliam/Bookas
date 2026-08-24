@@ -1,20 +1,20 @@
-import { Link } from "react-router";
-import { useApp } from "../../../app/providers/AppContext";
+import { Link } from 'react-router'
+import { useApp } from '../../../app/providers/AppContext'
 
 function getGreeting(): string {
-  const hour = new Date().getHours();
-  if (hour < 12) return "Buenos días";
-  if (hour < 20) return "Buenas tardes";
-  return "Buenas noches";
+  const hour = new Date().getHours()
+  if (hour < 12) return 'Buenos días'
+  if (hour < 20) return 'Buenas tardes'
+  return 'Buenas noches'
 }
 
 interface BusinessHeaderProps {
-  businessName: string;
+  businessName: string
 }
 
 export function BusinessHeader({ businessName }: BusinessHeaderProps) {
-  const { user } = useApp();
-  const firstName = user.name.split(" ")[0];
+  const { user } = useApp()
+  const firstName = user.name.split(' ')[0]
 
   return (
     <div className="flex items-center justify-between px-5 pt-14 pb-6">
@@ -36,5 +36,5 @@ export function BusinessHeader({ businessName }: BusinessHeaderProps) {
         />
       </Link>
     </div>
-  );
+  )
 }

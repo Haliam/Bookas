@@ -13,7 +13,7 @@ This file captures the unresolved UX/architectural questions from the original n
 - Onboarding flow: Recommend a single default flow offering two quick paths:
   - "Quick Start": Create Company → Add 1 Service → Publish booking link
   - "Detailed Setup": Create Company → Add Services → Configure Availability → Configure Payments
-  Choose "Quick Start" as default; allow switching to "Detailed Setup" later.
+    Choose "Quick Start" as default; allow switching to "Detailed Setup" later.
 
 - Onboarding demo appointment: Create a pre-populated demo appointment showing how to accept/cancel/reschedule. It should be easy to dismiss.
 
@@ -41,6 +41,7 @@ This file captures the unresolved UX/architectural questions from the original n
 ---
 
 Next steps
+
 - Prioritize API endpoints for calendar management and notifications if provider persistence is required.
 - Add payment UI components and connect them to the payment endpoints already present in the API.
 - Iterate on onboarding flows after a short user test with the quick-start default.

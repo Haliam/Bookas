@@ -1,30 +1,33 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import { Mail, Lock, User, Phone, Eye, EyeOff } from "lucide-react";
-import { Button } from "../../../shared/components/ui/Button";
-import { Input } from "../../../shared/components/ui/Input";
-import { useApp } from "../../../app/providers/AppContext";
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
+import { Mail, Lock, User, Phone, Eye, EyeOff } from 'lucide-react'
+import { Button } from '../../../shared/components/ui/Button'
+import { Input } from '../../../shared/components/ui/Input'
+import { useApp } from '../../../app/providers/AppContext'
 
 export function Register() {
-  const navigate = useNavigate();
-  const { setIsLoggedIn } = useApp();
-  const [showPass, setShowPass] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
+  const { setIsLoggedIn } = useApp()
+  const [showPass, setShowPass] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handleRegister = async () => {
-    setLoading(true);
-    await new Promise(r => setTimeout(r, 1400));
-    setLoading(false);
-    setIsLoggedIn(true);
-    navigate("/provider/onboarding");
-  };
+    setLoading(true)
+    await new Promise((r) => setTimeout(r, 1400))
+    setLoading(false)
+    setIsLoggedIn(true)
+    navigate('/provider/onboarding')
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FAFAFA] to-[#F4F4F4] flex items-center justify-center p-6">
       <div className="w-full max-w-[380px]">
         {/* Logo */}
         <div className="text-center mb-8">
-          <h1 className="text-[#2C2C2C] font-bold tracking-tight mb-1" style={{ fontSize: 36, letterSpacing: '0.05em' }}>
+          <h1
+            className="text-[#2C2C2C] font-bold tracking-tight mb-1"
+            style={{ fontSize: 36, letterSpacing: '0.05em' }}
+          >
             BOOKAS
           </h1>
         </div>
@@ -34,9 +37,7 @@ export function Register() {
           <h2 className="text-[#111827] text-xl font-semibold mb-2">
             Crea tu cuenta
           </h2>
-          <p className="text-[#6B7280] text-sm">
-            Empieza gratis hoy
-          </p>
+          <p className="text-[#6B7280] text-sm">Empieza gratis hoy</p>
         </div>
 
         {/* Form Card */}
@@ -75,21 +76,24 @@ export function Register() {
             />
             <Input
               label="Contraseña"
-              type={showPass ? "text" : "password"}
+              type={showPass ? 'text' : 'password'}
               placeholder="Mínimo 8 caracteres"
               iconLeft={<Lock size={18} className="text-[#9CA3AF]" />}
               iconRight={
-                <button onClick={() => setShowPass(!showPass)} className="text-[#9CA3AF]">
+                <button
+                  onClick={() => setShowPass(!showPass)}
+                  className="text-[#9CA3AF]"
+                >
                   {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               }
               required
             />
 
-            <Button 
-              fullWidth 
-              size="lg" 
-              loading={loading} 
+            <Button
+              fullWidth
+              size="lg"
+              loading={loading}
               onClick={handleRegister}
               className="mt-2"
             >
@@ -97,8 +101,8 @@ export function Register() {
             </Button>
 
             <p className="text-center text-[11px] text-[#9CA3AF] leading-relaxed">
-              Al registrarte aceptas nuestros{" "}
-              <span className="text-[#2C2C2C]">Términos</span> y{" "}
+              Al registrarte aceptas nuestros{' '}
+              <span className="text-[#2C2C2C]">Términos</span> y{' '}
               <span className="text-[#2C2C2C]">Privacidad</span>
             </p>
           </div>
@@ -107,17 +111,17 @@ export function Register() {
         {/* Footer Links */}
         <div className="text-center space-y-3">
           <p className="text-sm text-[#6B7280]">
-            ¿Ya tienes cuenta?{" "}
-            <button 
-              onClick={() => navigate("/login")} 
+            ¿Ya tienes cuenta?{' '}
+            <button
+              onClick={() => navigate('/login')}
               className="text-[#2C2C2C] font-medium hover:text-[#000000] transition-colors"
             >
               Inicia sesión
             </button>
           </p>
-          
+
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate('/')}
             className="text-sm text-[#9CA3AF] hover:text-[#6B7280] transition-colors"
           >
             ← Volver al inicio
@@ -125,5 +129,5 @@ export function Register() {
         </div>
       </div>
     </div>
-  );
+  )
 }

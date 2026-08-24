@@ -1,67 +1,68 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import { Button } from "../../../shared/components/ui/Button";
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
+import { Button } from '../../../shared/components/ui/Button'
 
 const SLIDES = [
   {
-    emoji: "🏢",
-    title: "Gestiona tu negocio",
-    description: "Crea y administra todos tus negocios y servicios desde un solo lugar. Simple, rápido y organizado.",
-    color: "#2C2C2C",
-    bg: "#FAFAFA",
+    emoji: '🏢',
+    title: 'Gestiona tu negocio',
+    description:
+      'Crea y administra todos tus negocios y servicios desde un solo lugar. Simple, rápido y organizado.',
+    color: '#2C2C2C',
+    bg: '#FAFAFA',
   },
   {
-    emoji: "📅",
-    title: "Recibe reservas automáticas",
-    description: "Tus clientes pueden reservar 24/7. Tú controlas tu agenda, horarios y disponibilidad.",
-    color: "#1BBF8A",
-    bg: "#E8FBF4",
-  },
-    {
-    emoji: "💳",
-    title: "Controla y recibe tu dinero",
-    description: "Activa la pasarela de pagos para cobrar online, controlar cada movimiento y recibir tus ingresos de forma segura.",
-    color: "#2563EB",
-    bg: "#EAF2FF",
+    emoji: '📅',
+    title: 'Recibe reservas automáticas',
+    description:
+      'Tus clientes pueden reservar 24/7. Tú controlas tu agenda, horarios y disponibilidad.',
+    color: '#1BBF8A',
+    bg: '#E8FBF4',
   },
   {
-    emoji: "📊",
-    title: "Crece con datos reales",
-    description: "Analiza tus ingresos, servicios más populares y gestiona tu negocio con información en tiempo real.",
-    color: "#F5B11F",
-    bg: "#FEF7E0",
-  }
-];
+    emoji: '💳',
+    title: 'Controla y recibe tu dinero',
+    description:
+      'Activa la pasarela de pagos para cobrar online, controlar cada movimiento y recibir tus ingresos de forma segura.',
+    color: '#2563EB',
+    bg: '#EAF2FF',
+  },
+  {
+    emoji: '📊',
+    title: 'Crece con datos reales',
+    description:
+      'Analiza tus ingresos, servicios más populares y gestiona tu negocio con información en tiempo real.',
+    color: '#F5B11F',
+    bg: '#FEF7E0',
+  },
+]
 
 export function ProviderOnboarding() {
-  const navigate = useNavigate();
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate()
+  const [currentSlide, setCurrentSlide] = useState(0)
 
-  const isLastSlide = currentSlide === SLIDES.length - 1;
-  const slide = SLIDES[currentSlide];
+  const isLastSlide = currentSlide === SLIDES.length - 1
+  const slide = SLIDES[currentSlide]
 
   const handleNext = () => {
     if (isLastSlide) {
       // Force business creation after onboarding
-      navigate("/provider/companies/create");
+      navigate('/provider/companies/create')
     } else {
-      setCurrentSlide(prev => prev + 1);
+      setCurrentSlide((prev) => prev + 1)
     }
-  };
+  }
 
   const handleSkip = () => {
-    navigate("/provider/companies/create");
-  };
+    navigate('/provider/companies/create')
+  }
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Skip button */}
       {!isLastSlide && (
         <div className="p-5 flex justify-end">
-          <button
-            onClick={handleSkip}
-            className="text-sm text-[#9CA3AF]"
-          >
+          <button onClick={handleSkip} className="text-sm text-[#9CA3AF]">
             Saltar
           </button>
         </div>
@@ -101,7 +102,7 @@ export function ProviderOnboarding() {
               className="h-2 rounded-full transition-all"
               style={{
                 width: currentSlide === index ? 24 : 8,
-                background: currentSlide === index ? slide.color : "#D1D5DB",
+                background: currentSlide === index ? slide.color : '#D1D5DB',
               }}
             />
           ))}
@@ -114,7 +115,7 @@ export function ProviderOnboarding() {
           onClick={handleNext}
           style={{ background: slide.color }}
         >
-          {isLastSlide ? "Crear mi primer negocio" : "Siguiente"}
+          {isLastSlide ? 'Crear mi primer negocio' : 'Siguiente'}
         </Button>
 
         {isLastSlide && (
@@ -124,5 +125,5 @@ export function ProviderOnboarding() {
         )}
       </div>
     </div>
-  );
+  )
 }

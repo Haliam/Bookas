@@ -1,5 +1,5 @@
-import { Outlet } from "react-router";
-import { BottomNav } from "../../shared/components/navigation/BottomNav";
+import { Outlet } from 'react-router'
+import { BottomNav } from '../../shared/components/navigation/BottomNav'
 
 export function ProviderLayout() {
   return (
@@ -9,5 +9,5 @@ export function ProviderLayout() {
       </div>
       <BottomNav />
     </div>
-  );
+  )
 }

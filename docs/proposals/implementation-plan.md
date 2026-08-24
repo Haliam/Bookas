@@ -42,6 +42,7 @@ src/api/
 ### 1.3 Expand `AppContext`
 
 Add to existing context:
+
 - `accessToken`, `refreshToken`, `userId` (persisted to localStorage)
 - `login(email, password)` action
 - `register(data)` action
@@ -57,12 +58,12 @@ Wrap `/provider/*` routes so unauthenticated users are redirected to `/login`.
 
 _Wire existing Login/Register/ForgotPassword UI to real API. Zero design changes._
 
-| Step | File | Change |
-|------|------|--------|
-| 2.1 | `Login.tsx` | Call `auth.login()`, store tokens, navigate to `/provider` |
-| 2.2 | `Register.tsx` | Call `auth.register()`, on success navigate to `/onboarding-provider` |
-| 2.3 | `ForgotPassword.tsx` | Call `auth.forgotPassword()`, show success message |
-| 2.4 | `routes.tsx` | Remove `Onboarding` and `RoleSwitchLanding` routes |
+| Step | File                 | Change                                                                |
+| ---- | -------------------- | --------------------------------------------------------------------- |
+| 2.1  | `Login.tsx`          | Call `auth.login()`, store tokens, navigate to `/provider`            |
+| 2.2  | `Register.tsx`       | Call `auth.register()`, on success navigate to `/onboarding-provider` |
+| 2.3  | `ForgotPassword.tsx` | Call `auth.forgotPassword()`, show success message                    |
+| 2.4  | `routes.tsx`         | Remove `Onboarding` and `RoleSwitchLanding` routes                    |
 
 ---
 
@@ -70,13 +71,13 @@ _Wire existing Login/Register/ForgotPassword UI to real API. Zero design changes
 
 _Core provider setup. After this, a provider can fully manage their business._
 
-| Step | File | Change |
-|------|------|--------|
-| 3.1 | `Companies.tsx` | Replace `MY_COMPANIES` mock → `companies.getMyCompanies()` |
-| 3.2 | `CreateCompany.tsx` | Wire form → `companies.create()` / `companies.update()` · load company types for selector |
-| 3.3 | `Services.tsx` | Replace mock → `services.getByCompany(companyId)` |
-| 3.4 | `CreateService.tsx` | Wire form → `services.create()` / `services.update()` |
-| 3.5 | `Services.tsx` | Add delete button + confirmation → `services.delete()` |
+| Step | File                | Change                                                                                    |
+| ---- | ------------------- | ----------------------------------------------------------------------------------------- |
+| 3.1  | `Companies.tsx`     | Replace `MY_COMPANIES` mock → `companies.getMyCompanies()`                                |
+| 3.2  | `CreateCompany.tsx` | Wire form → `companies.create()` / `companies.update()` · load company types for selector |
+| 3.3  | `Services.tsx`      | Replace mock → `services.getByCompany(companyId)`                                         |
+| 3.4  | `CreateService.tsx` | Wire form → `services.create()` / `services.update()`                                     |
+| 3.5  | `Services.tsx`      | Add delete button + confirmation → `services.delete()`                                    |
 
 ---
 
@@ -84,23 +85,23 @@ _Core provider setup. After this, a provider can fully manage their business._
 
 _Daily-use core flow. After this, the app is functionally complete for MVP._
 
-| Step | File | Change |
-|------|------|--------|
-| 4.1 | `ProviderAppointments.tsx` | Replace mock → `appointments.asProvider()`, keep existing filter tabs |
-| 4.2 | `ProviderAppointmentDetail.tsx` | Load from `appointments.getById(id)` |
-| 4.3 | `ProviderAppointmentDetail.tsx` | Add Confirm / Reject / Complete actions → `appointments.updateStatus()` |
-| 4.4 | `Dashboard.tsx` | Filter today's appointments from `appointments.asProvider()` result |
-| 4.5 | `Calendar.tsx` | Derive appointment dots from same `appointments.asProvider()` call (no new request) |
+| Step | File                            | Change                                                                              |
+| ---- | ------------------------------- | ----------------------------------------------------------------------------------- |
+| 4.1  | `ProviderAppointments.tsx`      | Replace mock → `appointments.asProvider()`, keep existing filter tabs               |
+| 4.2  | `ProviderAppointmentDetail.tsx` | Load from `appointments.getById(id)`                                                |
+| 4.3  | `ProviderAppointmentDetail.tsx` | Add Confirm / Reject / Complete actions → `appointments.updateStatus()`             |
+| 4.4  | `Dashboard.tsx`                 | Filter today's appointments from `appointments.asProvider()` result                 |
+| 4.5  | `Calendar.tsx`                  | Derive appointment dots from same `appointments.asProvider()` call (no new request) |
 
 ---
 
 ## Phase 5 — Profile & settings
 
-| Step | File | Change |
-|------|------|--------|
-| 5.1 | `ProviderProfile.tsx` | Load from `users.getProfile()` on mount, save via `users.updateProfile()` |
-| 5.2 | `AppContext` | Replace `defaultUser` with real profile from API after login |
-| 5.3 | `ProviderSettings.tsx` | Keep as local-only stub for now |
+| Step | File                   | Change                                                                    |
+| ---- | ---------------------- | ------------------------------------------------------------------------- |
+| 5.1  | `ProviderProfile.tsx`  | Load from `users.getProfile()` on mount, save via `users.updateProfile()` |
+| 5.2  | `AppContext`           | Replace `defaultUser` with real profile from API after login              |
+| 5.3  | `ProviderSettings.tsx` | Keep as local-only stub for now                                           |
 
 ---
 
@@ -108,13 +109,13 @@ _Daily-use core flow. After this, the app is functionally complete for MVP._
 
 _Quality gate before calling MVP done._
 
-| Step | What |
-|------|------|
-| 6.1 | Add global error toast — Sonner is already installed, wire `ApiError` messages to it |
-| 6.2 | Add loading skeletons to all API-driven lists (pattern already exists in `Dashboard`) |
-| 6.3 | Add empty states to Companies, Services, Appointments when API returns `[]` |
-| 6.4 | Delete `mockData.ts` once all imports are removed |
-| 6.5 | Responsive layout — add desktop Sidebar, hide BottomNav on `md+` |
+| Step | What                                                                                  |
+| ---- | ------------------------------------------------------------------------------------- |
+| 6.1  | Add global error toast — Sonner is already installed, wire `ApiError` messages to it  |
+| 6.2  | Add loading skeletons to all API-driven lists (pattern already exists in `Dashboard`) |
+| 6.3  | Add empty states to Companies, Services, Appointments when API returns `[]`           |
+| 6.4  | Delete `mockData.ts` once all imports are removed                                     |
+| 6.5  | Responsive layout — add desktop Sidebar, hide BottomNav on `md+`                      |
 
 ---
 
@@ -122,14 +123,14 @@ _Quality gate before calling MVP done._
 
 These have no API backing yet. Keep screens as stubs, hide from nav.
 
-| Feature | Blocker |
-|---------|---------|
-| Working Hours | Needs new API endpoints |
-| Block Time Slots | Needs new API endpoints |
-| Notifications | Needs new API endpoints |
-| Reports / Analytics | Needs new API endpoints |
-| Payments | API ready (UC-35–40) — needs UX design first |
-| Google Login | API ready (UC-03) — low priority |
+| Feature             | Blocker                                      |
+| ------------------- | -------------------------------------------- |
+| Working Hours       | Needs new API endpoints                      |
+| Block Time Slots    | Needs new API endpoints                      |
+| Notifications       | Needs new API endpoints                      |
+| Reports / Analytics | Needs new API endpoints                      |
+| Payments            | API ready (UC-35–40) — needs UX design first |
+| Google Login        | API ready (UC-03) — low priority             |
 
 ---
 
