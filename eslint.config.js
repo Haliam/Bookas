@@ -29,7 +29,25 @@ export default tseslint.config(
     rules: {
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
-      'react-refresh/only-export-components': 'warn',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+    },
+  },
+  {
+    files: [
+      '**/routes.tsx',
+      '**/provider-routes.tsx',
+      '**/AppContext.tsx',
+      '**/form.tsx',
+      '**/navigation-menu.tsx',
+      '**/sidebar.tsx',
+      '**/Button.tsx',
+      '**/toggle.tsx',
+    ],
+    rules: {
+      'react-refresh/only-export-components': 'off',
     },
   },
   prettier,

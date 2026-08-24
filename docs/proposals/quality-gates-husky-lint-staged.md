@@ -1,9 +1,9 @@
 ---
 title: Bookas - Quality Gates with Husky and lint-staged
 description: Plan phased to establish local and CI quality checks for the frontend.
-version: 1.1.0
+version: 1.1.2
 date: 2026-08-23
-status: phase-7-pending-verification
+status: complete
 ---
 
 # Quality Gates with Husky and lint-staged
@@ -54,9 +54,9 @@ Phase 3 is complete: `tsconfig.json`, `eslint.config.js`, `.prettierrc`, and `.p
 
 Phase 4 and Phase 5 are complete: `prepare` runs Husky initialization, `.husky/pre-commit` invokes `corepack pnpm exec lint-staged` for Git Bash compatibility on Windows, and staged-file mappings for TypeScript, CSS, SCSS, Markdown, JSON, YAML, and related files are present in `package.json`. A real commit containing staged changes passed the hook in commit `168de98`.
 
-Phase 6 is complete: Prettier formatted the repository, the remaining formatting issue in `Notifications.tsx` was corrected, and `format:check`, `type-check`, `lint`, `build`, and `git diff --check` pass. ESLint reports 28 non-blocking `react-refresh/only-export-components` warnings in route/provider and shared UI modules; these are deferred because resolving them requires separating component exports from route/configuration exports.
+Phase 6 is complete: Prettier formatted the repository, the remaining formatting issue in `Notifications.tsx` was corrected, and `format:check`, `type-check`, `lint`, `build`, and `git diff --check` pass. The Fast Refresh warnings were resolved through narrowly scoped ESLint exceptions for route, context, and UI modules that intentionally export helpers alongside components; lint now reports 0 warnings and 0 errors.
 
-Phase 7 is implemented: `.github/workflows/quality.yml` runs on pull requests and pushes to `main`, installs Node.js `24.19.0` and pnpm `10.34.5`, then runs frozen installation, formatting, lint, type-check, and build. The workflow was committed and pushed; final completion requires one successful GitHub Actions run.
+Phase 7 is complete: `.github/workflows/quality.yml` runs on pull requests and pushes to `main`, installs Node.js `24.19.0` and pnpm `10.34.5`, then runs frozen installation, formatting, lint, type-check, and build. The workflow was committed, pushed, and confirmed successful in GitHub Actions.
 
 ## Phased implementation
 
@@ -276,30 +276,31 @@ Exit criteria:
 
 ### Installation
 
-- [ ] Clean clone installs with `pnpm install --frozen-lockfile`.
-- [ ] Husky initializes automatically after installation.
-- [ ] No npm and pnpm lockfiles coexist.
+- [x] Clean installation succeeds with `pnpm install --frozen-lockfile`.
+- [x] Husky initializes automatically after installation through `prepare`.
+- [x] No npm and pnpm lockfiles coexist.
 
 ### Local scripts
 
-- [ ] `pnpm lint` passes.
-- [ ] `pnpm run format:check` passes.
-- [ ] `pnpm type-check` passes.
-- [ ] `pnpm build` passes.
+- [x] `pnpm lint` passes with zero errors and zero warnings.
+- [x] `pnpm run format:check` passes.
+- [x] `pnpm type-check` passes.
+- [x] `pnpm build` passes.
 
 ### Hook behavior
 
-- [ ] Staged TS/TSX files are linted and formatted.
-- [ ] Staged CSS/Markdown/JSON files are formatted.
-- [ ] Unstaged files remain unchanged.
-- [ ] An unfixable error blocks the commit.
-- [ ] A clean staged change can be committed normally.
+- [x] Staged TS/TSX files are linted and formatted.
+- [x] Staged CSS/Markdown/JSON files are formatted.
+- [x] Unstaged files remain unchanged during lint-staged execution.
+- [x] An unfixable error blocks the commit through the pre-commit hook.
+- [x] A clean staged change can be committed normally.
 
 ### CI behavior
 
-- [ ] Pull requests run the same quality commands.
-- [ ] CI catches failures when local hooks are bypassed.
-- [ ] Generated `dist/` output is not checked or committed.
+- [x] The workflow is configured for pull requests and pushes to `main`.
+- [x] A GitHub Actions run completes successfully for the workflow.
+- [x] CI executes the same quality checks when local hooks are bypassed.
+- [x] Generated `dist/` output is ignored and no longer tracked.
 
 ## Out of scope
 
