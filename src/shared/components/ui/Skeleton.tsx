@@ -1,11 +1,17 @@
+import type { CSSProperties } from 'react'
+
 interface SkeletonProps {
-  className?: string;
+  className?: string
+  style?: CSSProperties
 }
 
-export function Skeleton({ className = "" }: SkeletonProps) {
+export function Skeleton({ className = '', style }: SkeletonProps) {
   return (
-    <div className={`animate-pulse bg-[#F0F0F0] rounded-xl ${className}`} />
-  );
+    <div
+      className={`animate-pulse bg-[#F0F0F0] rounded-xl ${className}`}
+      style={style}
+    />
+  )
 }
 
 export function SkeletonCard() {
@@ -18,7 +24,7 @@ export function SkeletonCard() {
         <Skeleton className="h-3 w-2/3" />
       </div>
     </div>
-  );
+  )
 }
 
 export function SkeletonList({ count = 3 }: { count?: number }) {
@@ -28,5 +34,5 @@ export function SkeletonList({ count = 3 }: { count?: number }) {
         <SkeletonCard key={i} />
       ))}
     </div>
-  );
+  )
 }

@@ -1,9 +1,9 @@
 ---
 title: Bookas - Quality Gates with Husky and lint-staged
 description: Plan phased to establish local and CI quality checks for the frontend.
-version: 1.0.6
+version: 1.0.8
 date: 2026-08-23
-status: phase-5-in-progress
+status: phase-6-complete
 ---
 
 # Quality Gates with Husky and lint-staged
@@ -50,6 +50,8 @@ Phase 2 tooling has been added to `package.json` and resolved in `pnpm-lock.yaml
 Phase 3 is complete: `tsconfig.json`, `eslint.config.js`, `.prettierrc`, and `.prettierignore` are configured; TypeScript is pinned to the `5.9.x` line for compatibility with `typescript-eslint@8.67.0`; and the quality scripts are present in `package.json`. `type-check`, `lint`, `format:check`, and `build` all pass. The build recreates local `dist/` output, which remains ignored and untracked.
 
 Phase 4 and the configuration portion of Phase 5 are implemented: `prepare` runs Husky initialization, `.husky/pre-commit` invokes `corepack pnpm exec lint-staged` for Git Bash compatibility on Windows, and staged-file mappings for TypeScript, CSS, SCSS, Markdown, JSON, YAML, and related files are present in `package.json`. Frozen installation and direct lint-staged execution pass; a real staged commit test remains pending.
+
+Phase 6 is complete: Prettier formatted the repository, the one remaining formatting issue in `Notifications.tsx` was corrected, and `format:check`, `type-check`, `lint`, `build`, and `git diff --check` pass. ESLint reports 28 non-blocking `react-refresh/only-export-components` warnings in route/provider and shared UI modules; these are deferred because resolving them requires separating component exports from route/configuration exports.
 
 ## Phased implementation
 

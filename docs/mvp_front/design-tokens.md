@@ -41,13 +41,13 @@ These tokens reflect what is already coded in components. Do not introduce new v
 
 These are used by `StatusBadge` and should stay consistent across all appointment lists:
 
-| Status | Background | Text |
-|--------|-----------|------|
-| confirmed | `#E8FBF4` | `#1BBF8A` |
-| pending | `#FEF7E0` | `#F5B11F` |
-| cancelled | `#FDECEA` | `#E94C59` |
-| completed | `#F0F0F0` | `#6B7280` |
-| noshow | `#F0F0F0` | `#9CA3AF` |
+| Status    | Background | Text      |
+| --------- | ---------- | --------- |
+| confirmed | `#E8FBF4`  | `#1BBF8A` |
+| pending   | `#FEF7E0`  | `#F5B11F` |
+| cancelled | `#FDECEA`  | `#E94C59` |
+| completed | `#F0F0F0`  | `#6B7280` |
+| noshow    | `#F0F0F0`  | `#9CA3AF` |
 
 ---
 

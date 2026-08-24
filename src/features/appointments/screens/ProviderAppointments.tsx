@@ -1,22 +1,27 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import { Clock } from "lucide-react";
-import { StatusBadge } from "../../../shared/components/ui/Badge";
-import { EmptyState } from "../../../shared/components/ui/EmptyState";
-import { TopBar } from "../../../shared/components/navigation/TopBar";
-import { useAppointmentsList, formatDayLabel, type AppointmentFilterTab } from "../hooks/useAppointmentsList";
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
+import type { Appointment } from '../../../app/data/mockData'
+import { Clock } from 'lucide-react'
+import { StatusBadge } from '../../../shared/components/ui/Badge'
+import { EmptyState } from '../../../shared/components/ui/EmptyState'
+import { TopBar } from '../../../shared/components/navigation/TopBar'
+import {
+  useAppointmentsList,
+  formatDayLabel,
+  type AppointmentFilterTab,
+} from '../hooks/useAppointmentsList'
 
 export function ProviderAppointments() {
-  const navigate = useNavigate();
-  const [filter, setFilter] = useState<AppointmentFilterTab>("confirmed");
-  const { allFiltered, grouped, hasMore, firstDate, loaderRef } = useAppointmentsList(filter);
+  const navigate = useNavigate()
+  const [filter, setFilter] = useState<AppointmentFilterTab>('confirmed')
+  const { allFiltered, grouped, hasMore, firstDate, loaderRef } =
+    useAppointmentsList(filter)
 
   const tabs: { key: AppointmentFilterTab; label: string }[] = [
-
-    { key: "confirmed", label: "Confirmadas" },
-    { key: "pending", label: "Pendientes" },
-    { key: "cancelled", label: "Canceladas" },
-  ];
+    { key: 'confirmed', label: 'Confirmadas' },
+    { key: 'pending', label: 'Pendientes' },
+    { key: 'cancelled', label: 'Canceladas' },
+  ]
 
   return (
     <div className="min-h-screen bg-white">
@@ -29,7 +34,7 @@ export function ProviderAppointments() {
             key={key}
             onClick={() => setFilter(key)}
             className={`flex-1 py-3 text-sm font-medium transition-colors relative ${
-              filter === key ? "text-[#2C2C2C]" : "text-[#9CA3AF]"
+              filter === key ? 'text-[#2C2C2C]' : 'text-[#9CA3AF]'
             }`}
           >
             {label}
@@ -55,28 +60,41 @@ export function ProviderAppointments() {
                   {formatDayLabel(date, firstDate)}
                 </p>
                 <div className="flex flex-col gap-3">
-                  {appts.map(appt => (
+                  {appts.map((appt) => (
                     <AppointmentCard
                       key={appt.id}
                       appt={appt}
-                      onClick={() => navigate(`/provider/appointments/${appt.id}`)}
+                      onClick={() =>
+                        navigate(`/provider/appointments/${appt.id}`)
+                      }
                     />
                   ))}
                 </div>
               </div>
             ))}
             {/* Infinite scroll sentinel */}
-            <div ref={loaderRef} className="h-8 flex items-center justify-center">
-              {hasMore && <span className="text-xs text-[#9CA3AF]">Cargando...</span>}
+            <div
+              ref={loaderRef}
+              className="h-8 flex items-center justify-center"
+            >
+              {hasMore && (
+                <span className="text-xs text-[#9CA3AF]">Cargando...</span>
+              )}
             </div>
           </div>
         )}
       </div>
     </div>
-  );
+  )
 }
 
-function AppointmentCard({ appt, onClick }: { appt: any; onClick: () => void }) {
+function AppointmentCard({
+  appt,
+  onClick,
+}: {
+  appt: Appointment
+  onClick: () => void
+}) {
   return (
     <div
       onClick={onClick}
@@ -84,8 +102,12 @@ function AppointmentCard({ appt, onClick }: { appt: any; onClick: () => void }) 
     >
       <div className="flex items-start justify-between gap-3 mb-3">
         <div>
-          <p className="text-sm font-medium text-[#2C2C2C]">{appt.serviceName}</p>
-          <p className="text-xs text-[#9CA3AF] mt-0.5">Reserva #{appt.id.toUpperCase()}</p>
+          <p className="text-sm font-medium text-[#2C2C2C]">
+            {appt.serviceName}
+          </p>
+          <p className="text-xs text-[#9CA3AF] mt-0.5">
+            Reserva #{appt.id.toUpperCase()}
+          </p>
         </div>
         <StatusBadge status={appt.status} />
       </div>
@@ -95,8 +117,10 @@ function AppointmentCard({ appt, onClick }: { appt: any; onClick: () => void }) 
           {appt.time} · {appt.duration}min
         </span>
         <span className="w-1 h-1 rounded-full bg-[#E0E0E0]" />
-        <span className="font-medium text-[#2C2C2C] ml-auto">{appt.price}€</span>
+        <span className="font-medium text-[#2C2C2C] ml-auto">
+          {appt.price}€
+        </span>
       </div>
     </div>
-  );
+  )
 }

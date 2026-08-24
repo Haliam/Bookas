@@ -1,15 +1,15 @@
-import { Suspense } from "react";
-import { RouterProvider } from "react-router";
-import { router } from "./routes";
-import { AppProvider } from "./providers/AppContext";
-import "../styles/booka.css";
+import { Suspense } from 'react'
+import { RouterProvider } from 'react-router'
+import { router } from './routes'
+import { AppProvider } from './providers/AppContext'
+import '../styles/booka.css'
 
 function RouteFallback() {
   return (
     <div className="min-h-screen bg-[#F4FAF4] flex items-center justify-center px-6">
       <p className="text-sm text-[#6B7280]">Cargando...</p>
     </div>
-  );
+  )
 }
 
 export default function App() {
@@ -24,5 +24,5 @@ export default function App() {
         </div>
       </div>
     </AppProvider>
-  );
+  )
 }

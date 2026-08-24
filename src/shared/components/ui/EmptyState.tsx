@@ -1,15 +1,21 @@
-import { ReactNode } from "react";
-import { Button } from "./Button";
+import { ReactNode } from 'react'
+import { Button } from './Button'
 
 interface EmptyStateProps {
-  icon?: ReactNode;
-  emoji?: string;
-  title: string;
-  description?: string;
-  cta?: { label: string; onClick: () => void };
+  icon?: ReactNode
+  emoji?: string
+  title: string
+  description?: string
+  cta?: { label: string; onClick: () => void }
 }
 
-export function EmptyState({ icon, emoji, title, description, cta }: EmptyStateProps) {
+export function EmptyState({
+  icon,
+  emoji,
+  title,
+  description,
+  cta,
+}: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-16 px-8 text-center gap-4">
       {emoji && (
@@ -32,5 +38,5 @@ export function EmptyState({ icon, emoji, title, description, cta }: EmptyStateP
         </Button>
       )}
     </div>
-  );
+  )
 }

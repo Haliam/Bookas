@@ -1,11 +1,21 @@
-import { useNavigate } from "react-router";
-import { Settings, ChevronRight, Star, TrendingUp, Users, LogOut, Building2, Bell, Shield, Calendar } from "lucide-react";
-import { useApp } from "../../../app/providers/AppContext";
-import { PROVIDER_STATS } from "../../../app/data/mockData";
+import { useNavigate } from 'react-router'
+import {
+  Settings,
+  ChevronRight,
+  Star,
+  TrendingUp,
+  LogOut,
+  Building2,
+  Bell,
+  Shield,
+  Calendar,
+} from 'lucide-react'
+import { useApp } from '../../../app/providers/AppContext'
+import { PROVIDER_STATS } from '../../../app/data/mockData'
 
 export function ProviderProfile() {
-  const navigate = useNavigate();
-  const { user } = useApp();
+  const navigate = useNavigate()
+  const { user } = useApp()
 
   return (
     <div className="min-h-screen bg-white">
@@ -19,12 +29,14 @@ export function ProviderProfile() {
               className="w-16 h-16 rounded-2xl object-cover"
             />
             <div>
-              <h2 className="text-[#2C2C2C] font-semibold text-lg">{user.name}</h2>
+              <h2 className="text-[#2C2C2C] font-semibold text-lg">
+                {user.name}
+              </h2>
               <p className="text-[#6B7280] text-sm">{user.email}</p>
             </div>
           </div>
           <button
-            onClick={() => navigate("/provider/settings")}
+            onClick={() => navigate('/provider/settings')}
             className="w-10 h-10 rounded-full bg-[#F5F5F5] flex items-center justify-center hover:bg-[#E8E8E8] transition-colors"
           >
             <Settings size={18} className="text-[#2C2C2C]" />
@@ -34,15 +46,21 @@ export function ProviderProfile() {
         {/* Stats */}
         <div className="grid grid-cols-3 gap-3">
           <div className="text-center p-3">
-            <p className="text-[#2C2C2C] font-semibold text-xl">{PROVIDER_STATS.totalClients}</p>
+            <p className="text-[#2C2C2C] font-semibold text-xl">
+              {PROVIDER_STATS.totalClients}
+            </p>
             <p className="text-[#9CA3AF] text-xs mt-1">Clientes</p>
           </div>
           <div className="text-center p-3 border-x border-[#F0F0F0]">
-            <p className="text-[#2C2C2C] font-semibold text-xl">{PROVIDER_STATS.rating}</p>
+            <p className="text-[#2C2C2C] font-semibold text-xl">
+              {PROVIDER_STATS.rating}
+            </p>
             <p className="text-[#9CA3AF] text-xs mt-1">Rating</p>
           </div>
           <div className="text-center p-3">
-            <p className="text-[#2C2C2C] font-semibold text-xl">{PROVIDER_STATS.completionRate}%</p>
+            <p className="text-[#2C2C2C] font-semibold text-xl">
+              {PROVIDER_STATS.completionRate}%
+            </p>
             <p className="text-[#9CA3AF] text-xs mt-1">Completas</p>
           </div>
         </div>
@@ -54,10 +72,22 @@ export function ProviderProfile() {
           <h3 className="text-[#2C2C2C] font-medium mb-4">Mi negocio</h3>
           <div className="space-y-2">
             {[
-              { icon: Building2, label: "Mis negocios", path: "/provider/companies" },
-              { icon: Calendar, label: "Calendario", path: "/provider/calendar" },
-              { icon: TrendingUp, label: "Reportes", path: "/provider/reports" },
-              { icon: Star, label: "Reseñas", path: "/provider/reviews" },
+              {
+                icon: Building2,
+                label: 'Mis negocios',
+                path: '/provider/companies',
+              },
+              {
+                icon: Calendar,
+                label: 'Calendario',
+                path: '/provider/calendar',
+              },
+              {
+                icon: TrendingUp,
+                label: 'Reportes',
+                path: '/provider/reports',
+              },
+              { icon: Star, label: 'Reseñas', path: '/provider/reviews' },
             ].map(({ icon: Icon, label, path }) => (
               <button
                 key={label}
@@ -78,8 +108,12 @@ export function ProviderProfile() {
           <h3 className="text-[#2C2C2C] font-medium mb-4">Cuenta</h3>
           <div className="space-y-2">
             {[
-              { icon: Bell, label: "Notificaciones", path: "/provider/settings" },
-              { icon: Shield, label: "Privacidad", path: "/provider/settings" },
+              {
+                icon: Bell,
+                label: 'Notificaciones',
+                path: '/provider/settings',
+              },
+              { icon: Shield, label: 'Privacidad', path: '/provider/settings' },
             ].map(({ icon: Icon, label, path }) => (
               <button
                 key={label}
@@ -102,5 +136,5 @@ export function ProviderProfile() {
         </button>
       </div>
     </div>
-  );
+  )
 }

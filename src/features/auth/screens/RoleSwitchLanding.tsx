@@ -1,28 +1,28 @@
-import { useNavigate } from "react-router";
-import { motion } from "motion/react";
-import { useApp } from "../../../app/providers/AppContext";
-import { Button } from "../../../shared/components/ui/Button";
-import { ArrowRight } from "lucide-react";
+import { useNavigate } from 'react-router'
+import { motion } from 'motion/react'
+import { Button } from '../../../shared/components/ui/Button'
+import { ArrowRight } from 'lucide-react'
 
 export function RoleSwitchLanding() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const c = {
-    emoji: "🏢",
-    title: "Modo Proveedor activado",
-    subtitle: "Provider mode · Manage your business",
-    description: "Ahora puedes gestionar tu negocio, servicios y todas tus citas de clientes.",
-    color: "#F5B11F",
-    bg: "#2C2C2C",
-    cta: "Ir al dashboard",
-    path: "/provider",
+    emoji: '🏢',
+    title: 'Modo Proveedor activado',
+    subtitle: 'Provider mode · Manage your business',
+    description:
+      'Ahora puedes gestionar tu negocio, servicios y todas tus citas de clientes.',
+    color: '#F5B11F',
+    bg: '#2C2C2C',
+    cta: 'Ir al dashboard',
+    path: '/provider',
     features: [
-      { emoji: "📊", text: "Ver estadísticas de tu negocio" },
-      { emoji: "⚙️", text: "Gestionar servicios y precios" },
-      { emoji: "📅", text: "Administrar citas de clientes" },
-      { emoji: "💰", text: "Seguir tus ingresos en tiempo real" },
+      { emoji: '📊', text: 'Ver estadísticas de tu negocio' },
+      { emoji: '⚙️', text: 'Gestionar servicios y precios' },
+      { emoji: '📅', text: 'Administrar citas de clientes' },
+      { emoji: '💰', text: 'Seguir tus ingresos en tiempo real' },
     ],
-  };
+  }
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: c.bg }}>
@@ -32,7 +32,7 @@ export function RoleSwitchLanding() {
         <motion.div
           initial={{ scale: 0, rotate: -10 }}
           animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: "spring", damping: 12, stiffness: 200 }}
+          transition={{ type: 'spring', damping: 12, stiffness: 200 }}
           className="w-24 h-24 rounded-3xl bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center text-5xl mb-8 shadow-2xl"
         >
           {c.emoji}
@@ -45,7 +45,9 @@ export function RoleSwitchLanding() {
           transition={{ delay: 0.2 }}
           className="px-4 py-1.5 rounded-full bg-white/15 border border-white/20 mb-5"
         >
-          <span className="text-white/80 text-xs tracking-widest uppercase">{c.subtitle}</span>
+          <span className="text-white/80 text-xs tracking-widest uppercase">
+            {c.subtitle}
+          </span>
         </motion.div>
 
         {/* Title */}
@@ -87,7 +89,9 @@ export function RoleSwitchLanding() {
                 className="flex items-center gap-2"
               >
                 <span className="text-base">{emoji}</span>
-                <span className="text-white/80 text-xs leading-tight">{text}</span>
+                <span className="text-white/80 text-xs leading-tight">
+                  {text}
+                </span>
               </motion.div>
             ))}
           </div>
@@ -107,7 +111,7 @@ export function RoleSwitchLanding() {
             onClick={() => navigate(c.path)}
             iconRight={<ArrowRight size={18} />}
             style={{
-              background: "white",
+              background: 'white',
               color: c.color,
             }}
           >
@@ -116,5 +120,5 @@ export function RoleSwitchLanding() {
         </motion.div>
       </div>
     </div>
-  );
+  )
 }

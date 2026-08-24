@@ -10,29 +10,29 @@ author: Haliam Perez
 
 ## Auth — public, no layout wrapper
 
-| Screen | Route | API endpoint |
-|--------|-------|-------------|
-| Landing | `/` | — |
-| Login | `/login` | `POST /api/v1/accounts/login` |
-| Register | `/register` | `POST /api/v1/accounts/register` |
-| Forgot Password | `/forgot-password` | `POST /api/v1/accounts/forgot-password` |
-| Reset Password | `/reset-password` | `POST /api/v1/accounts/reset-password` |
-| Provider Onboarding | `/onboarding-provider` | — (3 intro slides → create company) |
+| Screen              | Route                  | API endpoint                            |
+| ------------------- | ---------------------- | --------------------------------------- |
+| Landing             | `/`                    | —                                       |
+| Login               | `/login`               | `POST /api/v1/accounts/login`           |
+| Register            | `/register`            | `POST /api/v1/accounts/register`        |
+| Forgot Password     | `/forgot-password`     | `POST /api/v1/accounts/forgot-password` |
+| Reset Password      | `/reset-password`      | `POST /api/v1/accounts/reset-password`  |
+| Provider Onboarding | `/onboarding-provider` | — (3 intro slides → create company)     |
 
 ## Provider — inside ProviderLayout (auth-gated)
 
-| Screen | Route | API endpoint |
-|--------|-------|-------------|
-| Dashboard | `/provider` | `GET /api/v1/appointments/as-provider` |
-| Calendar | `/provider/calendar` | `GET /api/v1/appointments/as-provider` (reuse) |
-| Appointments | `/provider/appointments` | `GET /api/v1/appointments/as-provider` |
-| Appointment Detail | `/provider/appointments/:id` | `GET /api/v1/appointments/:id` · `PUT /api/v1/appointments/:id/status` |
-| Companies | `/provider/companies` | `GET /api/v1/companies/my-companies` |
-| Create / Edit Company | `/provider/companies/create` · `/provider/companies/:id/edit` | `POST` · `PUT /api/v1/companies` |
-| Services | `/provider/companies/:id/services` | `GET /api/v1/companies/:id/services` |
-| Create / Edit Service | `/provider/companies/:id/services/create` | `POST` · `PUT /api/v1/companies/:id/services/:serviceId` |
-| Profile | `/provider/profile` | `GET` · `PUT /api/v1/users/profile` |
-| Settings | `/provider/settings` | local only (MVP) |
+| Screen                | Route                                                         | API endpoint                                                           |
+| --------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Dashboard             | `/provider`                                                   | `GET /api/v1/appointments/as-provider`                                 |
+| Calendar              | `/provider/calendar`                                          | `GET /api/v1/appointments/as-provider` (reuse)                         |
+| Appointments          | `/provider/appointments`                                      | `GET /api/v1/appointments/as-provider`                                 |
+| Appointment Detail    | `/provider/appointments/:id`                                  | `GET /api/v1/appointments/:id` · `PUT /api/v1/appointments/:id/status` |
+| Companies             | `/provider/companies`                                         | `GET /api/v1/companies/my-companies`                                   |
+| Create / Edit Company | `/provider/companies/create` · `/provider/companies/:id/edit` | `POST` · `PUT /api/v1/companies`                                       |
+| Services              | `/provider/companies/:id/services`                            | `GET /api/v1/companies/:id/services`                                   |
+| Create / Edit Service | `/provider/companies/:id/services/create`                     | `POST` · `PUT /api/v1/companies/:id/services/:serviceId`               |
+| Profile               | `/provider/profile`                                           | `GET` · `PUT /api/v1/users/profile`                                    |
+| Settings              | `/provider/settings`                                          | local only (MVP)                                                       |
 
 **Total MVP screens: 15**
 
@@ -40,10 +40,10 @@ author: Haliam Perez
 
 ## Screens to remove from router
 
-| Screen | File | Reason |
-|--------|------|--------|
-| Generic Onboarding | `Onboarding.tsx` | Redundant — `ProviderOnboarding` covers this |
-| Role Switch | `RoleSwitchLanding.tsx` | Deleted per design decisions |
+| Screen             | File                    | Reason                                       |
+| ------------------ | ----------------------- | -------------------------------------------- |
+| Generic Onboarding | `Onboarding.tsx`        | Redundant — `ProviderOnboarding` covers this |
+| Role Switch        | `RoleSwitchLanding.tsx` | Deleted per design decisions                 |
 
 ---
 

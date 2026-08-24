@@ -78,29 +78,35 @@ src/
 ## 5. Implementation phases
 
 ### Phase 1 — Foundation (no behavior change)
+
 - Create `src/features/` and `src/shared/` directories.
 - Move `components/ui`, `components/navigation`, `components/figma` to `shared/components/*` (path/import updates only).
 - Move `context/AppContext.tsx` to `app/providers/AppContext.tsx`.
 - Split `data/mockData.ts` types into per-domain `model/*.types.ts` files (kept re-exported from a compat module initially to avoid breaking imports in one pass).
 
 ### Phase 2 — Migrate features one at a time
+
 For each feature (`business-home`, `appointments`, `companies`, `services`, `scheduling`, `notifications`, `reports`, `settings-profile`, `auth`, `onboarding`, `landing`):
+
 - Move its screen(s) and private components into `features/<name>/screens` and `features/<name>/components`.
 - Introduce `features/<name>/api/*.api.ts` wrapping the relevant mock arrays.
 - Update imports in `routes.tsx`.
 - Verify the app builds and routes still resolve after each feature move (incremental, low-risk commits).
 
 ### Phase 3 — Extract business logic into hooks
+
 - `useAppointmentsList(filter)`: filtering, sorting, grouping-by-date, and pagination logic currently inline in `ProviderAppointments.tsx`.
 - `useBusinessHomeSummary()`: today/pending/weekly derivations currently inline in `BusinessHome.tsx`.
 - `useCreateCompanyForm()`: multi-step form state/validation currently inline in `CreateCompany.tsx`.
 - Apply the same pattern to remaining screens with non-trivial local logic (`Companies`, `Services`, `Dashboard`).
 
 ### Phase 4 — Route table decomposition
+
 - Move route definitions into each feature (`features/<name>/routes.tsx`), composed by `app/routes.tsx`.
 - Evaluate `React.lazy` per feature route to enable code-splitting.
 
 ### Phase 5 — Data-layer readiness
+
 - Once a real backend is available, replace mock-array reads inside `api/*.api.ts` with actual HTTP calls, without touching screens or hooks.
 - Introduce a server-state library (e.g. React Query) at this point, keeping it isolated from `AppContext`'s client/session state.
 
